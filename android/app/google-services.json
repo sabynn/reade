@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "392579089137",
+    "project_id": "reade-1cfa8",
+    "storage_bucket": "reade-1cfa8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392579089137:android:5039d63baec87742ab5f50",
+        "android_client_info": {
+          "package_name": "com.amygdala.reade"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392579089137-a7dr0t3dr7a4oqsmbl8op9lusk3mjct6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfQFGhE18GCL1P-91rqfNDIu3VrH1zn9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392579089137-a7dr0t3dr7a4oqsmbl8op9lusk3mjct6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import '../../cubit/auth_cubit.dart';
 import '../../shared/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,8 +17,19 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
+      User? user = FirebaseAuth.instance.currentUser;
       Navigator.pushNamedAndRemoveUntil(
           context, '/get-started', (route) => false);
+      if (user == null) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/get-started', (route) => false);
+      } else {
+        if (kDebugMode) {
+          print(user.email);
+        }
+        context.read<AuthCubit>().getCurrentUser(user.uid);
+        Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+      }
     });
     super.initState();
   }
