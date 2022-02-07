@@ -1,4 +1,4 @@
-package com.example.reade
+package com.amygdala.reade
 
 import io.flutter.embedding.android.FlutterActivity
 
