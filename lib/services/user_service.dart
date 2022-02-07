@@ -14,6 +14,7 @@ class UserService {
         'gender': user.gender,
         'education': user.education,
         'interests': user.interests,
+        'profileImage': user.profileImage,
         'sentimentScores': user.sentimentScores,
         'toneScores': user.toneScores,
         'eyeVisibilityScores': user.eyeVisibilityScores,
@@ -36,6 +37,7 @@ class UserService {
         dateOfBirth: snapshot['dateOfBirth'],
         gender: snapshot['gender'],
         education: snapshot['education'],
+        profileImage: snapshot['profileImage'],
         interests: snapshot['interests'],
         sentimentScores: snapshot['sentimentScores'],
         toneScores: snapshot['toneScores'],
@@ -44,6 +46,28 @@ class UserService {
         fileRecentInterview: snapshot['fileRecentInterview'],
         fileExpectedAnswer: snapshot['fileExpectedAnswer'],
       );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateUserData(UserModel user) async {
+    try {
+      _userReference.doc(user.id).set({
+        'email': user.email,
+        'name': user.name,
+        'dateOfBirth': user.dateOfBirth,
+        'gender': user.gender,
+        'education': user.education,
+        'profileImage': user.profileImage,
+        'interests': user.interests,
+        'sentimentScores': user.sentimentScores,
+        'toneScores': user.toneScores,
+        'eyeVisibilityScores': user.eyeVisibilityScores,
+        'smilingScores': user.smilingScores,
+        'fileRecentInterview': user.fileRecentInterview,
+        'fileExpectedAnswer': user.fileExpectedAnswer,
+      });
     } catch (e) {
       rethrow;
     }

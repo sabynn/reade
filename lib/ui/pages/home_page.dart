@@ -2,6 +2,7 @@ import 'package:reade/cubit/auth_cubit.dart';
 import 'package:reade/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../widgets/custom_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,13 +12,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     Widget header() {
       return BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           if (state is AuthSuccess) {
+            print(state.user);
             return Container(
               margin: EdgeInsets.only(
                 left: defaultMargin,
@@ -51,18 +52,18 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  // Container(
-                  //   width: 60,
-                  //   height: 60,
-                  //   decoration: const BoxDecoration(
-                  //     shape: BoxShape.circle,
-                  //     image: DecorationImage(
-                  //       image: AssetImage(
-                  //         'assets/image_profile.png',
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          state.user.profileImage,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             );
@@ -77,6 +78,38 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         children: [
           header(),
+          BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {
+              if (state is AuthFailed) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: kRedColor,
+                    content: Text(state.error),
+                  ),
+                );
+              } else if (state is AuthInitial) {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/sign-in', (route) => false);
+              }
+            },
+            builder: (context, state) {
+              if (state is AuthLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              return Center(
+                child: CustomButton(
+                  title: 'Sign Out',
+                  onPressed: () {
+                    context.read<AuthCubit>().signOut();
+                  },
+                  width: 220,
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

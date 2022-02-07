@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:equatable/equatable.dart';
 
@@ -9,6 +8,7 @@ class UserModel extends Equatable {
   final String dateOfBirth;
   final String gender;
   final String education;
+  final String profileImage;
   final List<dynamic> interests;
   final List<dynamic> sentimentScores;
   final List<dynamic> toneScores;
@@ -24,6 +24,7 @@ class UserModel extends Equatable {
     required this.dateOfBirth,
     required this.gender,
     required this.education,
+    required this.profileImage,
     required this.interests,
     this.sentimentScores = const [],
     this.toneScores = const [0.0],
@@ -41,6 +42,7 @@ class UserModel extends Equatable {
         dateOfBirth,
         gender,
         education,
+        profileImage,
         interests,
         sentimentScores,
         toneScores,

@@ -4,30 +4,130 @@ import 'package:reade/ui/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../shared/theme.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
+import 'package:path/path.dart';
 
-class SignUpPage extends StatelessWidget {
-  SignUpPage({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController nameController = TextEditingController(text: '');
+
   final TextEditingController emailController = TextEditingController(text: '');
+
   final TextEditingController passwordController =
       TextEditingController(text: '');
+
   final TextEditingController dateOfBirthController =
       TextEditingController(text: '');
+
   final TextEditingController genderController =
       TextEditingController(text: '');
+
   final TextEditingController educationController =
       TextEditingController(text: '');
+
   final TextEditingController interestsController =
       TextEditingController(text: '');
 
+  late String profileImageLink = "";
+  File? _image = null;
+
   @override
   Widget build(BuildContext context) {
+    Future uploadPic(BuildContext context) async {
+      String fileName = basename(_image!.path);
+      Reference firebaseStorageRef =
+      FirebaseStorage.instance.ref("profile-images/").child(fileName);
+      UploadTask uploadTask = firebaseStorageRef.putFile(_image!);
+      dynamic url = await (await uploadTask).ref.getDownloadURL();
+      url = url.toString();
+      profileImageLink = url;
+    }
+
+    Future getImage() async {
+      var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      setState(() {
+        _image = File(image!.path);
+        uploadPic(context);
+        print('Image Path $_image');
+      });
+    }
+
+
+
+    Widget widgetGetImage() {
+      return Align(
+        alignment: Alignment.center,
+        child: CircleAvatar(
+          radius: 100,
+          backgroundColor: const Color(0xff476cfb),
+          child: ClipOval(
+            child: SizedBox(
+              width: 180.0,
+              height: 180.0,
+              child: (_image != null)
+                  ? Image.file(
+                      _image!,
+                      fit: BoxFit.fill,
+                    )
+                  : Image.network(
+                      "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+                      fit: BoxFit.fill,
+                    ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    Widget widgetUploadPic() {
+      return Padding(
+        padding: const EdgeInsets.only(
+          top: 10.0,
+        ),
+        child: TextButton.icon(
+          style: TextButton.styleFrom(
+            textStyle: TextStyle(
+              color: kBackgroundColor,
+            ),
+            backgroundColor: kPrimaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                25.0,
+              ),
+            ),
+          ),
+          onPressed: () => {
+            getImage(),
+          },
+          icon: Icon(
+            Icons.camera,
+            color: kBackgroundColor,
+            size: 25.0,
+          ),
+          label: Text(
+            "Upload Image",
+            style: whiteTextStyle.copyWith(
+              fontSize: 12,
+              fontWeight: semiBold,
+            ),
+          ),
+        ),
+      );
+    }
+
     Widget title() {
       return Container(
         margin: const EdgeInsets.only(top: 30),
         child: Text(
-          'Join us and get\nyour next journey',
+          'Join us and upgrade\nyour interview skill',
           style: darkTextStyle.copyWith(
             fontSize: 24,
             fontWeight: semiBold,
@@ -99,7 +199,7 @@ class SignUpPage extends StatelessWidget {
           listener: (context, state) {
             if (state is AuthSuccess) {
               Navigator.pushNamedAndRemoveUntil(
-                  context, '/bonus', (route) => false);
+                  context, '/sign-in', (route) => false);
             } else if (state is AuthFailed) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -119,15 +219,17 @@ class SignUpPage extends StatelessWidget {
             return CustomButton(
               title: 'Sign Up',
               onPressed: () {
+                uploadPic(context);
                 context.read<AuthCubit>().signUp(
-                  email: emailController.text,
-                  password: passwordController.text,
-                  name: nameController.text,
-                  dateOfBirth: dateOfBirthController.text,
-                  gender: genderController.text,
-                  education: educationController.text,
-                  interests: [interestsController.text],
-                );
+                      email: emailController.text,
+                      password: passwordController.text,
+                      name: nameController.text,
+                      dateOfBirth: dateOfBirthController.text,
+                      gender: genderController.text,
+                      education: educationController.text,
+                      interests: [interestsController.text],
+                      profileImage: profileImageLink,
+                    );
               },
             );
           },
@@ -148,6 +250,8 @@ class SignUpPage extends StatelessWidget {
         ),
         child: Column(
           children: [
+            widgetGetImage(),
+            widgetUploadPic(),
             nameInput(),
             emailInput(),
             passwordInput(),
