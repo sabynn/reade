@@ -43,6 +43,11 @@ dependencies:
   intl: ^0.17.0
   image_picker: ^0.8.4+6
   firebase_storage: ^10.2.6
+  speech_to_text: ^5.4.2
+  get: ^4.1.4
+  camera: ^0.9.4+9
+  google_ml_kit: ^0.7.3
+  gallery_saver: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -66,7 +71,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - images/
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,9 +1,19 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../services/controller/interview_controller.dart';
 import '../../shared/theme.dart';
 
-class InterviewPage extends StatelessWidget {
+class InterviewPage extends StatefulWidget {
   const InterviewPage({Key? key}) : super(key: key);
+
+  @override
+  State<InterviewPage> createState() => _InterviewPageState();
+}
+
+class _InterviewPageState extends State<InterviewPage> {
+  final _interviewController = InterviewController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +34,36 @@ class InterviewPage extends StatelessWidget {
               ),
             ),
             ListView(
-              children: [],
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 75.0),
+                  child: GetBuilder<InterviewController>(
+                    init: _interviewController,
+                    initState: (_) async {
+                      await _interviewController.loadCamera();
+                      _interviewController.startImageStream();
+                    },
+                    builder: (_) {
+                      return _.cameraController != null &&
+                          _.cameraController!.value.isInitialized
+                          ? Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        height:
+                        MediaQuery.of(context).size.height * 0.60,
+                        child: CameraPreview(
+                          _.cameraController!,
+                        ),
+                      )
+                          : const Center(
+                        child: Text(
+                          'loading',
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
