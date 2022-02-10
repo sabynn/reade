@@ -8,7 +8,7 @@ import 'camera_controller.dart';
 import 'face_detention_controller.dart';
 
 class InterviewController extends GetxController {
-  CameraManager? _cameraManager;
+  CameraManager? cameraManager;
   CameraController? cameraController;
   FaceDetetorController? _faceDetect;
   bool _isDetecting = false;
@@ -19,18 +19,77 @@ class InterviewController extends GetxController {
   String? rightEyeLabel = 'Right Eye State';
 
   InterviewController() {
-    _cameraManager = CameraManager();
+    cameraManager = CameraManager();
     _faceDetect = FaceDetetorController();
   }
 
   Future<void> loadCamera() async {
-    cameraController = await _cameraManager?.load();
+    cameraController = await cameraManager?.load();
     update();
+  }
+
+  Future<void> changeCamera() async {
+    cameraController = await cameraManager?.changeCamera();
+    startImageStream();
+    update();
+  }
+
+  Future<void> startVideoRecording() async {
+    final CameraController? camController = cameraController;
+
+    print("INI DIA CAMNYA");
+    print(camController?.description);
+    if (camController == null || !camController.value.isInitialized) {
+      print('Error: select a camera first.');
+      return;
+    }
+
+    if (cameraController!.value.isRecordingVideo) {
+      // A recording is already started, do nothing.
+      return;
+    }
+
+    try {
+      cameraController?.startVideoRecording();
+    } on CameraException catch (e) {
+      print(e);
+      return;
+    }
+  }
+
+  Future<XFile?> stopVideoRecording() async {
+    final CameraController? camController = cameraController;
+
+    if (camController == null || !camController.value.isRecordingVideo) {
+      return null;
+    }
+
+    try {
+      return camController.stopVideoRecording();
+    } on CameraException catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  Future<void> stopImageStream() async {
+    final CameraController? camController = cameraController;
+
+    if (camController == null || !camController.value.isStreamingImages) {
+      return;
+    }
+
+    try {
+      return camController.stopImageStream();
+    } on CameraException catch (e) {
+      print(e);
+      return;
+    }
   }
 
   Future<void> startImageStream() async {
     CameraDescription camera = cameraController!.description;
-
+    startVideoRecording();
     cameraController?.startImageStream((cameraImage) async {
       if (_isDetecting) return;
 
@@ -43,7 +102,7 @@ class InterviewController extends GetxController {
       final bytes = allBytes.done().buffer.asUint8List();
 
       final Size imageSize =
-      Size(cameraImage.width.toDouble(), cameraImage.height.toDouble());
+          Size(cameraImage.width.toDouble(), cameraImage.height.toDouble());
 
       final InputImageRotation imageRotation =
           InputImageRotationMethods.fromRawValue(camera.sensorOrientation) ??
@@ -54,7 +113,7 @@ class InterviewController extends GetxController {
               InputImageFormat.NV21;
 
       final planeData = cameraImage.planes.map(
-            (Plane plane) {
+        (Plane plane) {
           return InputImagePlaneMetadata(
             bytesPerRow: plane.bytesPerRow,
             height: plane.height,
@@ -62,37 +121,40 @@ class InterviewController extends GetxController {
           );
         },
       ).toList();
-
       final inputImageData = InputImageData(
         size: imageSize,
         imageRotation: imageRotation,
         inputImageFormat: inputImageFormat,
         planeData: planeData,
       );
-
       final inputImage = InputImage.fromBytes(
         bytes: bytes,
         inputImageData: inputImageData,
       );
-
       processImage(inputImage);
     });
   }
 
   Future<void> processImage(inputImage) async {
+    await Future.delayed(Duration(seconds: 10));
     faces = await _faceDetect?.processImage(inputImage);
 
     if (faces != null && faces!.isNotEmpty) {
       FaceModel? face = faces?.first;
       smileLabel = detectSmile(face?.smile);
+      print("LABELLL1");
+      print(smileLabel);
       leftEyeLabel = detectLeftEye(face?.leftEyeOpen);
       rightEyeLabel = detectRightEye(face?.rightEyeOpen);
     } else {
       faceAtMoment = 'normal_face.png';
       smileLabel = 'Not face detected';
+      print("LABELLL2");
+      print(smileLabel);
     }
     _isDetecting = false;
-
+    print("LABELLL3");
+    print(_isDetecting);
     update();
   }
 

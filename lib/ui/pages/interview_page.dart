@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
 
 import '../../services/controller/interview_controller.dart';
@@ -15,6 +16,32 @@ class InterviewPage extends StatefulWidget {
 
 class _InterviewPageState extends State<InterviewPage> {
   final _interviewController = InterviewController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  XFile? videoFile;
+
+  void showInSnackBar(String message) {
+    // ignore: deprecated_member_use
+    _scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  void endInterview() {
+    print('Video recorded to asnjajsiais');
+    _interviewController.stopVideoRecording().then((file) async {
+      if (mounted) setState(() {});
+      if (file != null) {
+        bool? saveVid =
+            await GallerySaver.saveVideo(file.path, albumName: "Interview");
+        print('Video recorded to ${file.path} $saveVid');
+        videoFile = file;
+      }
+    });
+    _interviewController.stopImageStream();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,19 +82,22 @@ class _InterviewPageState extends State<InterviewPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             customFloatingButton(
-              Icons.mic,
+              Icons.cameraswitch,
               kBackgroundColor,
               kPrimaryColor,
-            ),
-            customFloatingButton(
-              Icons.camera_alt,
-              kBackgroundColor,
-              kPrimaryColor,
+              _interviewController.changeCamera,
             ),
             customFloatingButton(
               Icons.call_end,
               Colors.red,
               kBackgroundColor,
+              endInterview,
+            ),
+            customFloatingButton(
+              Icons.next_week,
+              kBackgroundColor,
+              kPrimaryColor,
+              endInterview,
             ),
           ],
         ),
