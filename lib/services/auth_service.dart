@@ -75,4 +75,12 @@ class AuthService {
       rethrow;
     }
   }
+
+  Future<void> updateUserData(UserModel user) async {
+    try {
+      await UserService().updateUserData(user);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -15,9 +15,7 @@ Widget customFloatingButton(
         child: FloatingActionButton(
           heroTag: icon,
           backgroundColor: buttonColor,
-          onPressed: () {
-            func();
-          },
+          onPressed: func,
           child: Icon(
             icon,
             color: iconColor,

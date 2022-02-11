@@ -29,7 +29,8 @@ class AuthCubit extends Cubit<AuthState> {
     required gender,
     required education,
     required interests,
-    profileImage = "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+    profileImage =
+        "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     sentimentScores = const [],
     toneScores = const [],
     eyeVisibilityScores = const [],
@@ -76,6 +77,18 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       UserModel user = await UserService().getUserById(id);
       emit(AuthSuccess(user));
+    } catch (e) {
+      emit(AuthFailed(e.toString()));
+    }
+  }
+
+  void updateUserData({
+    required UserModel userUpdate
+  }) async {
+    try {
+      emit(AuthLoading());
+      await AuthService().updateUserData(userUpdate);
+      emit(AuthSuccess(userUpdate));
     } catch (e) {
       emit(AuthFailed(e.toString()));
     }

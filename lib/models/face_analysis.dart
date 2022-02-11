@@ -1,11 +1,17 @@
 class FaceAnalysis {
-  double? smile;
-  double? rightEyeOpen;
-  double? leftEyeOpen;
+  double scoreSmile;
+  double scoreRightEyeOpen;
+  double scoreLeftEyeOpen;
+  int countSmile;
+  int countRightEyeOpen;
+  int countLeftEyeOpen;
 
   FaceAnalysis({
-    this.smile,
-    this.rightEyeOpen,
-    this.leftEyeOpen,
+    this.scoreSmile = 0,
+    this.scoreRightEyeOpen = 0,
+    this.scoreLeftEyeOpen = 0,
+    this.countSmile = 0,
+    this.countLeftEyeOpen = 0,
+    this.countRightEyeOpen = 0,
   });
 }

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:reade/models/face_analysis.dart';
 import '../../models/face_model.dart';
 import 'camera_controller.dart';
 import 'face_detention_controller.dart';
@@ -13,14 +14,12 @@ class InterviewController extends GetxController {
   FaceDetetorController? _faceDetect;
   bool _isDetecting = false;
   List<FaceModel>? faces;
-  String? faceAtMoment = 'normal_face.png';
-  String? smileLabel = 'Normal';
-  String? leftEyeLabel = 'Left Eye State';
-  String? rightEyeLabel = 'Right Eye State';
+  FaceAnalysis? faceAnalysis;
 
   InterviewController() {
     cameraManager = CameraManager();
     _faceDetect = FaceDetetorController();
+    faceAnalysis = FaceAnalysis();
   }
 
   Future<void> loadCamera() async {
@@ -37,8 +36,6 @@ class InterviewController extends GetxController {
   Future<void> startVideoRecording() async {
     final CameraController? camController = cameraController;
 
-    print("INI DIA CAMNYA");
-    print(camController?.description);
     if (camController == null || !camController.value.isInitialized) {
       print('Error: select a camera first.');
       return;
@@ -136,65 +133,40 @@ class InterviewController extends GetxController {
   }
 
   Future<void> processImage(inputImage) async {
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 5));
+    print("Detection");
     faces = await _faceDetect?.processImage(inputImage);
 
     if (faces != null && faces!.isNotEmpty) {
       FaceModel? face = faces?.first;
-      smileLabel = detectSmile(face?.smile);
-      print("LABELLL1");
-      print(smileLabel);
-      leftEyeLabel = detectLeftEye(face?.leftEyeOpen);
-      rightEyeLabel = detectRightEye(face?.rightEyeOpen);
+      detectSmile(face?.smile);
+      detectLeftEye(face?.leftEyeOpen);
+      detectRightEye(face?.rightEyeOpen);
     } else {
-      faceAtMoment = 'normal_face.png';
-      smileLabel = 'Not face detected';
-      print("LABELLL2");
-      print(smileLabel);
+      print("NO FACE DETECTED");
     }
     _isDetecting = false;
-    print("LABELLL3");
-    print(_isDetecting);
     update();
   }
 
-  String detectSmile(smileProb) {
-    if (smileProb > 0.86) {
-      faceAtMoment = 'happy_face.png';
-      return 'Big smile with teeth';
-    } else if (smileProb > 0.8) {
-      faceAtMoment = 'happy_face.png';
-      return 'Big Smile';
-    } else if (smileProb > 0.3) {
-      faceAtMoment = 'happy_face.png';
-      return 'Smile';
-    } else {
-      faceAtMoment = 'sady_face.png';
-      return 'Sad';
+  void detectSmile(smileProb) {
+    if(smileProb > 0.3){
+      faceAnalysis!.scoreSmile += 1;
     }
+    faceAnalysis!.countSmile += 1;
   }
 
-  String detectLeftEye(leftEyeProb) {
-    if (leftEyeProb > 0.86) {
-      return 'Left Eye Open Very Clearly';
-    } else if (leftEyeProb > 0.8) {
-      return 'Left Eye Open Clearly';
-    } else if (leftEyeProb > 0.3) {
-      return 'Left Eye Open ';
-    } else {
-      return 'Left Eye Closed ';
+  void detectLeftEye(leftEyeProb) {
+    if(leftEyeProb > 0.3){
+      faceAnalysis!.scoreLeftEyeOpen += 1;
     }
+    faceAnalysis!.countLeftEyeOpen += 1;
   }
 
-  String detectRightEye(rightEyeProb) {
-    if (rightEyeProb > 0.86) {
-      return 'Right Eye Open Very Clearly';
-    } else if (rightEyeProb > 0.8) {
-      return 'Right Eye Open Clearly';
-    } else if (rightEyeProb > 0.3) {
-      return 'Right Eye Open ';
-    } else {
-      return 'Right Eye Closed ';
+  void detectRightEye(rightEyeProb) {
+    if(rightEyeProb > 0.3){
+      faceAnalysis!.scoreRightEyeOpen += 1;
     }
+    faceAnalysis!.countRightEyeOpen += 1;
   }
 }
