@@ -113,6 +113,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  dart_sentiment:
+    dependency: "direct main"
+    description:
+      name: dart_sentiment
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.9"
   equatable:
     dependency: "direct main"
     description:
@@ -457,6 +464,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1+1"
+  remove_emoji:
+    dependency: transitive
+    description:
+      name: remove_emoji
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.6"
   sky_engine:
     dependency: transitive
     description: flutter

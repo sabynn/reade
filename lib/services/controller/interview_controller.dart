@@ -11,14 +11,14 @@ import 'face_detention_controller.dart';
 class InterviewController extends GetxController {
   CameraManager? cameraManager;
   CameraController? cameraController;
-  FaceDetetorController? _faceDetect;
+  FaceDetectorController? _faceDetect;
   bool _isDetecting = false;
   List<FaceModel>? faces;
   FaceAnalysis? faceAnalysis;
 
   InterviewController() {
     cameraManager = CameraManager();
-    _faceDetect = FaceDetetorController();
+    _faceDetect = FaceDetectorController();
     faceAnalysis = FaceAnalysis();
   }
 
