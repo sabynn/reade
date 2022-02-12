@@ -1,7 +1,9 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:reade/cubit/auth_cubit.dart';
 import 'package:reade/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reade/ui/pages/sign_in_page.dart';
 import '../widgets/custom_button.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,103 +16,523 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    Widget header() {
-      return BlocBuilder<AuthCubit, AuthState>(
-        builder: (context, state) {
-          if (state is AuthSuccess) {
-            print(state.user);
-            return Container(
-              margin: EdgeInsets.only(
-                left: defaultMargin,
-                right: defaultMargin,
-                top: 30,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Welcome,\n${state.user.name}',
-                          style: darkTextStyle.copyWith(
-                            fontSize: 24,
-                            fontWeight: semiBold,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(
-                          height: 6,
-                        ),
-                        Text(
-                          'Prepare Your Interview',
-                          style: greyTextStyle.copyWith(
-                            fontSize: 16,
-                            fontWeight: light,
-                          ),
-                        ),
-                      ],
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+
+      appBar: AppBar(
+
+
+        actions: [
+
+          SizedBox(width: 10),
+          Container(
+            width: 90,
+            child: Image.asset(
+              'assets/images/Profile_icon.png',
+              width: 100,
+            ),
+          ),
+        ],
+        iconTheme: IconThemeData(color: Color(0xFF002884)),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      drawer: _mainMenu(context),
+      body: SafeArea(
+
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  <Widget>[
+                    Text(
+                      'Welcome, Saban!',
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        color: Color(0xFF002884),
+                      ),
                     ),
+                    Text(
+                      'Prepare your interview!',
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: Color(0xFF002884),
+                      ),
+                    ),
+
+                    Card(
+                      color: Colors.white38,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          ListTile(
+                            title: Text(
+                              'HR Interview',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 19,
+                                color: Color(0xFF002884),
+                              ),
+                            ),
+                            subtitle: Text(
+                              'Practice how to explain your personality, your strengths, your weaknesses, your capability to handle the role, your background, and compatibility for job.',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                                color: Color(0xFF002884),
+                              ),
+                            ),
+                            trailing: TextButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                  return SignInPage();
+                                },),);
+                              },
+                              child: Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: Color(0xFF002884),
+                                size: 36.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Card(
+                      color: Colors.white38,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            title: Text(
+                              'User Interview',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 19,
+                                color: Color(0xFF002884),
+                              ),
+                            ),
+                            subtitle: Text(
+                              'Practice how to explain about skill, experiences, and education background.',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                                color: Color(0xFF002884),
+                              ),
+                            ),
+                            trailing: TextButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                  return SignInPage();;
+                                },),);
+                              },
+                              child: Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: Color(0xFF002884),
+                                size: 36.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Card(
+                      color: Colors.white38,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            title: Text(
+                              'Case Interview',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 19,
+                                color: Color(0xFF002884),
+                              ),
+                            ),
+                            subtitle: Text(
+                              'Practice how to deliver, investigate, and propose a solution to challenging business scenarios',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                                color: Color(0xFF002884),
+                              ),
+                            ),
+                            trailing: TextButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                  return SignInPage();;
+                                },),);
+                              },
+                              child: Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: Color(0xFF002884),
+                                size: 36.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Card(
+                      color: Colors.white38,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            title: Text(
+                              'Focus Group Discussion',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 19,
+                                color: Color(0xFF002884),
+                              ),
+                            ),
+                            subtitle: Text(
+                              'Practice how to discuss in small group of people, answer a series of questions and report on the responses led by a moderator ',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                                color: Color(0xFF002884),
+                              ),
+                            ),
+                            trailing: TextButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                  return SignInPage();;
+                                },),);
+                              },
+                              child: Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: Color(0xFF002884),
+                                size: 36.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Card(
+                      color: Colors.white38,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            title: Text(
+                              'Leaderless Group Discussion',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 19,
+                                color: Color(0xFF002884),
+                              ),
+                            ),
+                            subtitle: Text(
+                              'Practice how to discuss in small group of people, answer a series of questions and report on the responses with no identified moderator.',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                                color: Color(0xFF002884),
+                              ),
+                            ),
+                            trailing: TextButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                  return SignInPage();
+                                },),);
+                              },
+                              child: Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: Color(0xFF002884),
+                                size: 36.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _learningVideos(String urlImage) {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        height: double.infinity,
+        alignment: Alignment.center,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: Image.asset(
+            urlImage,
+            width: 200.0,
+            height: 300.0,
+            fit: BoxFit.fitWidth,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _card(String title) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: Card(
+        color: Color(0xFFBFDA90),
+        child: Center(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Main Topic: " + title,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Color(0xFF3D550C),
                   ),
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          state.user.profileImage,
+                ),
+              ),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                color: Color(0xFF8EAF53),
+                child: Row(
+                  children: <Widget>[
+                    for (int i = 0; i < 5; i++)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          'assets/images/profile_pic_students.png',
+                          height: 30,
+                          width: 30,
                         ),
+                      )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints.tightFor(width: 80, height: 30),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return SignInPage();
+                      },),);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF81B622),
+                      shape: RoundedRectangleBorder(
+                        //to set border radius to button
+                          borderRadius: BorderRadius.circular(30)),
+                    ),
+                    child: Text(
+                      "Join",
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: Colors.blue,
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
-            );
-          } else {
-            return const SizedBox();
-          }
-        },
-      );
-    }
+            ],
+          ),
+        ),
+      ),
+    );
 
-    return Scaffold(
-      body: ListView(
-        children: [
-          header(),
-          BlocConsumer<AuthCubit, AuthState>(
-            listener: (context, state) {
-              if (state is AuthFailed) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: kRedColor,
-                    content: Text(state.error),
+  }
+
+  Widget _mainMenu(context) {
+
+    return Drawer(
+      child: Container(
+
+
+        decoration: BoxDecoration(
+
+            gradient: LinearGradient(
+                begin: Alignment(-1.0, -0.5),
+                end: Alignment(1.0, 1.5),
+                colors: [Colors.white, Color(0xFF557FED)])
+        ),
+
+
+        width: double.infinity,
+        height: double.infinity,
+
+
+
+        child: ListView(
+          padding: EdgeInsets.zero,
+
+          children: [
+            DrawerHeader(
+              child: Center(
+                child: Container(
+                  width: 100,
+                  child: Image.asset(
+                    'assets/images/Logo.png',
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text(
+                'Home',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color: Color(0xFF002884),
+                ),
+              ),
+              leading: const Icon(
+                Icons.home,
+                color: Color(0xFF002884),
+                size: 36.0,
+              ),
+              onTap: () {},
+            ),
+
+            ListTile(
+              title: Text(
+                'Interview Partner',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color: Color(0xFF002884),
+                ),
+              ),
+              leading: const Icon(
+                Icons.group_add_rounded,
+                color: Color(0xFF002884),
+                size: 36.0,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return SignInPage();;
+                    },
                   ),
                 );
-              } else if (state is AuthInitial) {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/sign-in', (route) => false);
-              }
-            },
-            builder: (context, state) {
-              if (state is AuthLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
+              },
+            ),
 
-              return Center(
-                child: CustomButton(
-                  title: 'Sign Out',
-                  onPressed: () {
-                    context.read<AuthCubit>().signOut();
-                  },
-                  width: 220,
+            ListTile(
+              title: Text(
+                'Resources',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color:Color(0xFF002884),
                 ),
-              );
-            },
+              ),
+              leading: const Icon(
+                Icons.file_copy_rounded,
+                color: Color(0xFF002884),
+                size: 36.0,
+              ),
+              onTap: () {},
+            ),
+
+            ListTile(
+              title: Text(
+                'Result Analytics',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color: Color(0xFF002884),
+                ),
+              ),
+              leading: const Icon(
+                Icons.bar_chart_rounded,
+                color: Color(0xFF002884),
+                size: 36.0,
+              ),
+              onTap: () {},
+            ),
+
+            ListTile(
+              title: Text(
+                'Meeting Boards',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color: Color(0xFF002884),
+                ),
+              ),
+              leading: const Icon(
+                Icons.people_outline_rounded,
+                color: Color(0xFF002884),
+                size: 36.0,
+              ),
+              onTap: () {},
+            ),
+
+            ListTile(
+              title: Text(
+                'Logout',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color: Color(0xFF002884),
+                ),
+              ),
+              leading: const Icon(
+                Icons.logout_rounded,
+                color: Color(0xFF002884),
+                size: 36.0,
+              ),
+              onTap: () {},
+            ),
+
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+class BaseLayout extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/Background1.jpg"),
+            fit: BoxFit.cover,
           ),
-        ],
+        ),
+        child: null /* add child content here */,
       ),
     );
   }
