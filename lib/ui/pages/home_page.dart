@@ -2,6 +2,7 @@ import 'package:reade/cubit/auth_cubit.dart';
 import 'package:reade/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_drawer.dart';
 
@@ -105,60 +106,6 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    Widget _customAppBar(){
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(
-                  100,
-                ),
-              ),
-              child: Container(
-                  height: 55,
-                  width: 55,
-                  color: kBackgroundColor,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.short_text,
-                      size: 30,
-                      color: kDarkColor,
-                    ),
-                    onPressed: () {
-                      _scaffoldKey.currentState?.openDrawer();
-                    },
-                  )),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(
-                  100,
-                ),
-              ),
-              child: Container(
-                  height: 55,
-                  width: 55,
-                  color: kBackgroundColor,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.person,
-                      size: 25,
-                      color: kDarkColor,
-                    ),
-                    onPressed: () {},
-                  )),
-            ),
-          ),
-        ],
-      );
-    }
-
     Widget _resourcesCard(
       String title,
       String subTitle,
@@ -245,7 +192,7 @@ class _HomePageState extends State<HomePage> {
               Center(
                 child: ListView(
                   children: [
-                    _customAppBar(),
+                    customAppBar(context, _scaffoldKey, true,),
                     header(),
                     cardInterview(
                       'HR Interview',

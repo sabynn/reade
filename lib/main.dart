@@ -5,7 +5,10 @@ import 'package:reade/ui/pages/after_interview_page.dart';
 import 'package:reade/ui/pages/get_started_page.dart';
 import 'package:reade/ui/pages/home_page.dart';
 import 'package:reade/ui/pages/interview_page.dart';
+import 'package:reade/ui/pages/interview_partner_page.dart';
+import 'package:reade/ui/pages/meeting_board_page.dart';
 import 'package:reade/ui/pages/pre_interview_page.dart';
+import 'package:reade/ui/pages/profile_page.dart';
 import 'package:reade/ui/pages/sign_in_page.dart';
 import 'package:reade/ui/pages/sign_up_page.dart';
 import 'package:reade/ui/pages/splash_screen.dart';
@@ -50,6 +53,9 @@ class MyApp extends StatelessWidget {
           '/pre-interview': (context) => const PreInterviewPage(),
           '/interview-page': (context) => const InterviewPage(),
           '/after-interview': (context) => AfterInterviewPage(),
+          '/profile-page': (context) => const ProfilePage(),
+          '/interview-partner': (context) => InterviewPartnerPage(),
+          '/meeting-boards': (context) => MeetingBoardPage(),
         },
       ),
     );

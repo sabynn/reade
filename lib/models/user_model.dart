@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 class UserModel extends Equatable {
@@ -14,6 +13,7 @@ class UserModel extends Equatable {
   final List<dynamic> toneScores;
   final List<dynamic> eyeVisibilityScores;
   final List<dynamic> smilingScores;
+  final List<dynamic> schedule;
   final dynamic fileRecentInterview;
   final dynamic fileExpectedAnswer;
 
@@ -32,6 +32,7 @@ class UserModel extends Equatable {
     this.smilingScores = const [0.0],
     this.fileRecentInterview = "",
     this.fileExpectedAnswer = "",
+    this.schedule = const [],
   });
 
   @override
@@ -50,5 +51,6 @@ class UserModel extends Equatable {
         smilingScores,
         fileRecentInterview,
         fileExpectedAnswer,
+        schedule,
       ];
 }

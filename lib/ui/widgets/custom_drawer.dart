@@ -57,7 +57,12 @@ Widget customDrawer(context) {
               color: kDarkColor,
               size: 30.0,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                "/interview-partner",
+              );
+            },
           ),
           ListTile(
             title: Text(
@@ -100,7 +105,12 @@ Widget customDrawer(context) {
               color: kDarkColor,
               size: 30.0,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                "/meeting-boards",
+              );
+            },
           ),
           BlocConsumer<AuthCubit, AuthState>(
             listener: (context, state) {
