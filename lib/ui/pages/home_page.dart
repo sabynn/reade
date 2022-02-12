@@ -38,15 +38,26 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
       ),
       drawer: _mainMenu(context),
-      body: SafeArea(
+      body: Container(
+
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.white,  Color(0xFF002884)])),
+
+
 
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
           child: CustomScrollView(
             slivers: <Widget>[
               SliverList(
                 delegate: SliverChildListDelegate(
                   <Widget>[
+                    SizedBox(   //Use of SizedBox
+                      height: 60,
+                    ),
                     Text(
                       'Welcome, Saban!',
                       style: GoogleFonts.poppins(
@@ -63,9 +74,12 @@ class _HomePageState extends State<HomePage> {
                         color: Color(0xFF002884),
                       ),
                     ),
+                    SizedBox(   //Use of SizedBox
+                      height: 20,
+                    ),
 
                     Card(
-                      color: Colors.white38,
+                      color: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
@@ -105,9 +119,11 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-
+                    SizedBox(   //Use of SizedBox
+                      height: 20,
+                    ),
                     Card(
-                      color: Colors.white38,
+                      color: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
@@ -134,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                             trailing: TextButton(
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                  return SignInPage();;
+                                  return SignInPage();
                                 },),);
                               },
                               child: Icon(
@@ -147,9 +163,11 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-
+                    SizedBox(   //Use of SizedBox
+                      height: 20,
+                    ),
                     Card(
-                      color: Colors.white38,
+                      color: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
@@ -176,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                             trailing: TextButton(
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                  return SignInPage();;
+                                  return SignInPage();
                                 },),);
                               },
                               child: Icon(
@@ -189,8 +207,11 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
+                    SizedBox(   //Use of SizedBox
+                      height: 20,
+                    ),
                     Card(
-                      color: Colors.white38,
+                      color: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
@@ -217,10 +238,10 @@ class _HomePageState extends State<HomePage> {
                             trailing: TextButton(
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                  return SignInPage();;
+                                  return SignInPage();
                                 },),);
                               },
-                              child: Icon(
+                              child: const Icon(
                                 Icons.arrow_forward_ios_rounded,
                                 color: Color(0xFF002884),
                                 size: 36.0,
@@ -230,9 +251,11 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-
+                    const SizedBox(   //Use of SizedBox
+                      height: 20,
+                    ),
                     Card(
-                      color: Colors.white38,
+                      color: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
@@ -262,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                                   return SignInPage();
                                 },),);
                               },
-                              child: Icon(
+                              child: const Icon(
                                 Icons.arrow_forward_ios_rounded,
                                 color: Color(0xFF002884),
                                 size: 36.0,
@@ -306,7 +329,7 @@ class _HomePageState extends State<HomePage> {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: Card(
-        color: Color(0xFFBFDA90),
+        color: const Color(0xFFBFDA90),
         child: Center(
           child: Column(
             children: [
@@ -325,7 +348,7 @@ class _HomePageState extends State<HomePage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                color: Color(0xFF8EAF53),
+                color: const Color(0xFF8EAF53),
                 child: Row(
                   children: <Widget>[
                     for (int i = 0; i < 5; i++)
@@ -343,7 +366,7 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ConstrainedBox(
-                  constraints: BoxConstraints.tightFor(width: 80, height: 30),
+                  constraints: const BoxConstraints.tightFor(width: 80, height: 30),
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -351,7 +374,7 @@ class _HomePageState extends State<HomePage> {
                       },),);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color(0xFF81B622),
+                      primary: const Color(0xFF81B622),
                       shape: RoundedRectangleBorder(
                         //to set border radius to button
                           borderRadius: BorderRadius.circular(30)),
@@ -381,7 +404,7 @@ class _HomePageState extends State<HomePage> {
       child: Container(
 
 
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
 
             gradient: LinearGradient(
                 begin: Alignment(-1.0, -0.5),
@@ -443,7 +466,7 @@ class _HomePageState extends State<HomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SignInPage();;
+                      return SignInPage();
                     },
                   ),
                 );
@@ -521,12 +544,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-class BaseLayout extends StatelessWidget{
+class BaseLayout extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/Background1.jpg"),
             fit: BoxFit.cover,
