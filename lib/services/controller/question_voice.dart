@@ -10,8 +10,8 @@ class QuestionVoice {
   String? language;
   String? engine;
   double volume = 1.0;
-  double pitch = 0.6;
-  double rate = 0.5;
+  double pitch = 0.3;
+  double rate = 0.53;
   bool isCurrentLanguageInstalled = false;
 
   String? _newVoiceText;

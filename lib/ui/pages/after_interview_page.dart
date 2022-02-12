@@ -33,9 +33,11 @@ class AfterInterviewPage extends StatelessWidget {
                 height: 100,
                 child: Center(
                   child: Text(
-                    score.toString(),
+                    score.toStringAsFixed(2),
                     style: darkTextStyle.copyWith(
-                        fontSize: 30, fontWeight: FontWeight.bold),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -122,24 +124,21 @@ class AfterInterviewPage extends StatelessWidget {
                             state
                                 .user
                                 .eyeVisibilityScores[
-                                    state.user.eyeVisibilityScores.length - 1]
-                                .toString(),
+                                    state.user.eyeVisibilityScores.length - 1],
                             "/100.0"),
                         scoringSection(
                             "Smiling Score",
                             state
                                 .user
                                 .smilingScores[
-                                    state.user.smilingScores.length - 1]
-                                .toString(),
+                                    state.user.smilingScores.length - 1],
                             "/100.0"),
                         scoringSection(
                             "Sentiment Score",
                             state
                                 .user
                                 .sentimentScores[
-                                    state.user.sentimentScores.length - 1]
-                                .toString(),
+                                    state.user.sentimentScores.length - 1],
                             "*score < 0 means negative sentiment\n "
                                 "score == 0 means neutral sentiment\n "
                                 "score > 0 means positive sentiment"),

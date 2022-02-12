@@ -11,7 +11,7 @@ class CameraManager {
     int position = cameras!.length > 1 ? 1 : 0;
     _controller = CameraController(
       cameras![position],
-      ResolutionPreset.medium,
+      ResolutionPreset.high,
       enableAudio: true,
     );
     cameraDescription = _controller?.description;
