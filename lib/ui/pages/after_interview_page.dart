@@ -70,98 +70,96 @@ class AfterInterviewPage extends StatelessWidget {
             ),
           ),
           Center(
-            child: SafeArea(
-              child: BlocBuilder<AuthCubit, AuthState>(
-                builder: (context, state) {
-                  if (state is AuthSuccess) {
-                    print(state.user);
-                    user = state.user;
-                    return ListView(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: defaultMargin,
+            child: BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, state) {
+                if (state is AuthSuccess) {
+                  print(state.user);
+                  user = state.user;
+                  return ListView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: defaultMargin,
+                    ),
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                          left: defaultMargin,
+                          right: defaultMargin,
+                          top: 30,
+                        ),
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: Text(
+                                  'Congrats,\n${state.user.name}',
+                                  style: darkTextStyle.copyWith(
+                                    fontSize: 24,
+                                    fontWeight: semiBold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 6,
+                              ),
+                              Center(
+                                child: Text(
+                                  'This is the result of your interview',
+                                  style: greyTextStyle.copyWith(
+                                    fontSize: 18,
+                                    fontWeight: light,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: defaultMargin,
-                            right: defaultMargin,
-                            top: 30,
-                          ),
-                          child: Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Center(
-                                  child: Text(
-                                    'Congrats,\n${state.user.name}',
-                                    style: darkTextStyle.copyWith(
-                                      fontSize: 24,
-                                      fontWeight: semiBold,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 6,
-                                ),
-                                Center(
-                                  child: Text(
-                                    'This is the result of your interview',
-                                    style: greyTextStyle.copyWith(
-                                      fontSize: 18,
-                                      fontWeight: light,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
-                            ),
+                      scoringSection(
+                          "Eye Visibility Score",
+                          state
+                              .user
+                              .eyeVisibilityScores[
+                                  state.user.eyeVisibilityScores.length - 1],
+                          "/100.0"),
+                      scoringSection(
+                          "Smiling Score",
+                          state
+                              .user
+                              .smilingScores[
+                                  state.user.smilingScores.length - 1],
+                          "/100.0"),
+                      scoringSection(
+                          "Sentiment Score",
+                          state
+                              .user
+                              .sentimentScores[
+                                  state.user.sentimentScores.length - 1],
+                          "*score < 0 means negative sentiment\n "
+                              "score == 0 means neutral sentiment\n "
+                              "score > 0 means positive sentiment"),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomButton(
+                          title: 'See Analytics',
+                          onPressed: () {},
+                          width: 20,
+                          heightSize: 45,
+                          margin: const EdgeInsets.only(
+                            left: 30,
+                            right: 30,
                           ),
                         ),
-                        scoringSection(
-                            "Eye Visibility Score",
-                            state
-                                .user
-                                .eyeVisibilityScores[
-                                    state.user.eyeVisibilityScores.length - 1],
-                            "/100.0"),
-                        scoringSection(
-                            "Smiling Score",
-                            state
-                                .user
-                                .smilingScores[
-                                    state.user.smilingScores.length - 1],
-                            "/100.0"),
-                        scoringSection(
-                            "Sentiment Score",
-                            state
-                                .user
-                                .sentimentScores[
-                                    state.user.sentimentScores.length - 1],
-                            "*score < 0 means negative sentiment\n "
-                                "score == 0 means neutral sentiment\n "
-                                "score > 0 means positive sentiment"),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomButton(
-                            title: 'See Analytics',
-                            onPressed: () {},
-                            width: 20,
-                            heightSize: 45,
-                            margin: const EdgeInsets.only(
-                              left: 30,
-                              right: 30,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  } else {
-                    return const SizedBox();
-                  }
-                },
-              ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
             ),
           ),
         ],

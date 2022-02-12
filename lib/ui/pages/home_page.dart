@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.pushNamed(
                       context,
-                      '/interview-page',
+                      '/pre-interview',
                     );
                   },
                 ),
