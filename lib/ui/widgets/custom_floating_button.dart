@@ -5,12 +5,14 @@ Widget customFloatingButton(
     Color buttonColor,
     Color iconColor,
     var func,
+    var height,
+    var width,
     ) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: SizedBox(
-      height: 65.0,
-      width: 65.0,
+      height: height,
+      width: width,
       child: FittedBox(
         child: FloatingActionButton(
           heroTag: icon,

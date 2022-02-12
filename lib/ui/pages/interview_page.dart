@@ -9,7 +9,6 @@ import 'package:reade/services/controller/question_voice.dart';
 import 'package:reade/services/controller/voice_controller.dart';
 import '../../cubit/auth_cubit.dart';
 import '../../cubit/question_cubit.dart';
-import '../../models/question_model.dart';
 import '../../services/controller/interview_controller.dart';
 import '../../shared/theme.dart';
 import '../widgets/custom_floating_button.dart';
@@ -153,6 +152,8 @@ class _InterviewPageState extends State<InterviewPage> {
                           () {
                             _interviewController.changeCamera();
                           },
+                          65.0,
+                          65.0,
                         ),
                         customFloatingButton(
                           Icons.call_end,
@@ -161,6 +162,8 @@ class _InterviewPageState extends State<InterviewPage> {
                           () {
                             endInterview(state.user);
                           },
+                          65.0,
+                          65.0,
                         ),
                         customFloatingButton(
                           Icons.next_week,
@@ -169,6 +172,8 @@ class _InterviewPageState extends State<InterviewPage> {
                           () {
                             nextQuestion();
                           },
+                          65.0,
+                          65.0,
                         ),
                       ],
                     ),
