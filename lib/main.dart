@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reade/ui/pages/after_interview_page.dart';
 import 'package:reade/ui/pages/get_started_page.dart';
 import 'package:reade/ui/pages/interview_page.dart';
 import 'package:reade/ui/pages/sign_in_page.dart';
@@ -8,6 +9,7 @@ import 'package:reade/ui/pages/sign_up_page.dart';
 import 'package:reade/ui/pages/splash_screen.dart';
 
 import 'cubit/auth_cubit.dart';
+import 'cubit/question_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +28,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => AuthCubit(),
         ),
+        BlocProvider(
+          create: (context) => QuestionCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -40,6 +45,7 @@ class MyApp extends StatelessWidget {
           '/sign-up': (context) => const SignUpPage(),
           '/sign-in': (context) => SignInPage(),
           '/home': (context) => InterviewPage(),
+          '/after-interview': (context) => AfterInterviewPage(),
         },
       ),
     );

@@ -1,9 +1,10 @@
 import 'dart:math';
-
 import 'package:dart_sentiment/dart_sentiment.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+
+import '../../models/user_model.dart';
 
 class VoiceDetector {
   bool _hasSpeech = false;
@@ -55,12 +56,13 @@ class VoiceDetector {
         listenMode: ListenMode.confirmation);
   }
 
-  void stopListening() {
+  void stopListening(UserModel user) {
     print('stop');
     print(lastWords);
     final sentiment = Sentiment();
     sentimentResult = sentiment.analysis(lastWords)["score"];
     print(sentimentResult);
+    user.sentimentScores.add(sentimentResult);
     speech.stop();
     level = 0.0;
   }
