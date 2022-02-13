@@ -10,7 +10,6 @@ class AllUserService {
   Future<List<UserModel>> fetchAllUser() async {
     try {
       QuerySnapshot result = await _allUserReference.get();
-
       List<UserModel> allUsers = result.docs.map(
             (e) {
           return UserModel.fromJson(

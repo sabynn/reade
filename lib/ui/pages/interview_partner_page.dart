@@ -16,12 +16,105 @@ class InterviewPartnerPage extends StatefulWidget {
 
 class _InterviewPartnerPageState extends State<InterviewPartnerPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  List<UserModel> usersPartner = [];
 
   @override
   void initState() {
     context.read<AllUserCubit>().fetchAllUser();
     super.initState();
   }
+
+  Widget buildListFriend(UserModel user) => Padding(
+      padding: const EdgeInsets.only(top: 10.0, left: 5, right: 5),
+      child: Card(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+            color: Color(0xff183cbb),
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
+                children: <Widget>[
+                  const SizedBox(width: 10),
+                  buildImage(user.profileImage),
+                  const SizedBox(width: 10),
+                  Text(
+                    user.name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: Color(0xff183cbb),
+                    ),
+                  ),
+                  const Spacer(),
+                  buildAddIcon(user),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ));
+
+  Widget buildImage(String imagePath) {
+    final image = NetworkImage(imagePath);
+
+    return ClipOval(
+      child: Material(
+        color: Colors.transparent,
+        child: Ink.image(
+          image: image,
+          fit: BoxFit.cover,
+          width: 50,
+          height: 50,
+        ),
+      ),
+    );
+  }
+
+  Widget buildAddIcon(UserModel user) {
+    return ClipOval(
+      child: Material(
+        color: const Color(0xff183cbb),
+        child: IconButton(
+          icon: Icon(
+            usersPartner.contains(user) ? Icons.check : Icons.add,
+            color: Colors.white,
+            size: 20,
+          ),
+          onPressed: () {
+            setState(() {
+              usersPartner.contains(user)
+                  ? usersPartner.remove(user)
+                  : usersPartner.add(user);
+              print("YESSSS");
+              print(usersPartner);
+            });
+          },
+          iconSize: 10,
+        ),
+      ),
+    );
+  }
+
+  Widget buildNextButton(BuildContext context) => ButtonWidget(
+        fontSize: 14,
+        text: 'Next',
+        onClicked: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => new InterviewPartnerPage2(
+                usersPartner: usersPartner,
+              ),
+            ),
+          );
+        },
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +143,11 @@ class _InterviewPartnerPageState extends State<InterviewPartnerPage> {
                   child: ListView(
                     physics: BouncingScrollPhysics(),
                     children: [
-                      customAppBar(context, _scaffoldKey, false),
+                      customAppBar(
+                        context,
+                        _scaffoldKey,
+                        false,
+                      ),
                       Center(
                         child: Text(
                           "Choose Your Interview Partner",
@@ -73,20 +170,16 @@ class _InterviewPartnerPageState extends State<InterviewPartnerPage> {
                         },
                         builder: (context, state) {
                           if (state is AllUserSuccess) {
-                            print("YASS BERHASIL");
-                            print(state.allUsers);
-                            return Container(
-                              child: Column(
-                                children: <Widget>[
-                                  for (int i = 0;
-                                      i <=
-                                          state.allUsers.lastIndexWhere(
-                                              (element) => true);
-                                      i++)
-                                    if (state.allUsers[i].name != user.name)
-                                      (buildListFriend(state.allUsers[i]))
-                                ],
-                              ),
+                            return Column(
+                              children: <Widget>[
+                                for (int i = 0;
+                                    i <=
+                                        state.allUsers
+                                            .lastIndexWhere((element) => true);
+                                    i++)
+                                  if (state.allUsers[i].name != user.name)
+                                    (buildListFriend(state.allUsers[i]))
+                              ],
                             );
                           }
                           return const Center(
@@ -115,78 +208,3 @@ class _InterviewPartnerPageState extends State<InterviewPartnerPage> {
     );
   }
 }
-
-Widget buildListFriend(UserModel user) => Padding(
-    padding: const EdgeInsets.only(top: 10.0, left: 5, right: 5),
-    child: Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        side: const BorderSide(
-          color: Color(0xff183cbb),
-          width: 2.0,
-        ),
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Row(
-              children: <Widget>[
-                const SizedBox(width: 10),
-                buildImage(user.profileImage),
-                const SizedBox(width: 10),
-                Text(
-                  user.name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                    color: Color(0xff183cbb),
-                  ),
-                ),
-                const Spacer(),
-                buildAddIcon(),
-              ],
-            ),
-          ],
-        ),
-      ),
-    ));
-
-Widget buildImage(String imagePath) {
-  final image = NetworkImage(imagePath);
-
-  return ClipOval(
-    child: Material(
-      color: Colors.transparent,
-      child: Ink.image(
-        image: image,
-        fit: BoxFit.cover,
-        width: 50,
-        height: 50,
-      ),
-    ),
-  );
-}
-
-Widget buildAddIcon() {
-  return ClipOval(
-    child: Material(
-      color: Color(0xff183cbb),
-      child: IconButton(
-        icon: Icon(Icons.add, color: Colors.white, size: 20),
-        onPressed: () {},
-        iconSize: 10,
-      ),
-    ),
-  );
-}
-
-Widget buildNextButton(BuildContext context) => ButtonWidget(
-      fontSize: 14,
-      text: 'Next',
-      onClicked: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => InterviewPartnerPage2()));
-      },
-    );

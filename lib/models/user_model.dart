@@ -52,8 +52,8 @@ class UserModel extends Equatable {
       fileRecentInterview: json["fileRecentInterview"],
       fileExpectedAnswer: json["fileExpectedAnswer"],
       schedule: json["schedule"],
-      id: '',
-      videoFile: json["videoFile"]);
+      videoFile: json["videoFile"],
+      id: id);
 
   @override
   List<Object?> get props => [

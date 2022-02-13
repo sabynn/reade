@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reade/shared/theme.dart';
 
 import '../../cubit/auth_cubit.dart';
+import '../../models/meeting.dart';
 import '../../models/user_model.dart';
 import '../widgets/appbar_widget.dart';
 import '../widgets/button_widget.dart';
@@ -9,6 +11,10 @@ import 'interview_partner_page.dart';
 import 'meeting_board_page.dart';
 
 class InterviewPartnerPage2 extends StatefulWidget {
+  final List<UserModel> usersPartner;
+  const InterviewPartnerPage2({Key? key, required this.usersPartner})
+      : super(key: key);
+
   @override
   _InterviewPartnerPage2State createState() => _InterviewPartnerPage2State();
 }
@@ -19,6 +25,8 @@ class _InterviewPartnerPage2State extends State<InterviewPartnerPage2> {
 
   @override
   Widget build(BuildContext context) {
+    dateController.text = selectedDate.toString().substring(0, 10);
+    timeController.text = selectedTime.toString().substring(11, 15);
     return Scaffold(
       appBar: buildAppBar(
         context,
@@ -28,16 +36,17 @@ class _InterviewPartnerPage2State extends State<InterviewPartnerPage2> {
       body: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           if (state is AuthSuccess) {
-            print(state.user);
-            UserModel user = state.user;
             return ListView(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               physics: BouncingScrollPhysics(),
               children: [
                 const SizedBox(height: 20),
-                Text(
+                const Text(
                   "Input Your Meeting Date and Time",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 20),
                 dateInput("Date", dateController, "Input date"),
@@ -62,8 +71,7 @@ class _InterviewPartnerPage2State extends State<InterviewPartnerPage2> {
   late String articlePublishedDate;
 
   DateTime selectedDate = DateTime.now();
-  final TextEditingController _dateController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  TimeOfDay selectedTime = TimeOfDay.now();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -74,14 +82,14 @@ class _InterviewPartnerPage2State extends State<InterviewPartnerPage2> {
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: Colors.green, // header background color
+            colorScheme: ColorScheme.light(
+              primary: kPrimaryColor, // header background color
               onPrimary: Colors.black, // header text color
               onSurface: Colors.blue, // body text color
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                primary: Colors.red, // button text color
+                primary: kDarkColor, // button text color
               ),
             ),
           ),
@@ -89,17 +97,34 @@ class _InterviewPartnerPage2State extends State<InterviewPartnerPage2> {
         );
       },
     );
+
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
         articlePublishedDate = picked.toString().substring(0, 10);
-        _dateController.text = picked.toString().substring(0, 10);
+        dateController.text = picked.toString().substring(0, 10);
+      });
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      initialTime: selectedTime,
+      context: context,
+    );
+    if (picked != null) {
+      setState(() {
+        selectedTime = picked;
+        timeController.text = '$picked'.substring(11, 15);
       });
     }
   }
 
   Widget dateInput(
-      String text, TextEditingController controller, String hintText) {
+    String text,
+    TextEditingController controller,
+    String hintText,
+  ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 30),
       child: Column(
@@ -125,9 +150,19 @@ class _InterviewPartnerPage2State extends State<InterviewPartnerPage2> {
                 borderRadius: BorderRadius.circular(
                   5,
                 ),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Color(0xff456ed9),
                 ),
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  text == "Date"
+                      ? Icons.calendar_today_rounded
+                      : Icons.access_alarm,
+                ),
+                onPressed: () {
+                  text == "Date" ? _selectDate(context) : _selectTime(context);
+                },
               ),
             ),
           ),
@@ -140,8 +175,20 @@ class _InterviewPartnerPage2State extends State<InterviewPartnerPage2> {
         fontSize: 14,
         text: 'Confirm',
         onClicked: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => MeetingBoardPage()));
+          print("INIII USER PARTNER");
+          print(widget.usersPartner);
+          Meeting createMeet = Meeting(
+            date: dateController.text,
+            time: timeController.text,
+            usersPartner: widget.usersPartner,
+          );
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => MeetingBoardPage(
+                addMeeting: createMeet,
+              ),
+            ),
+          );
         },
       );
 }

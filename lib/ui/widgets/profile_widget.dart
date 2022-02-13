@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String imagePath;
+  final double width;
+  final double height;
 
   const ProfileWidget({
     Key? key,
     required this.imagePath,
+    this.width = 135,
+    this.height = 135,
   }) : super(key: key);
 
   @override
@@ -30,8 +34,8 @@ class ProfileWidget extends StatelessWidget {
           child: Ink.image(
             image: image,
             fit: BoxFit.cover,
-            width: 135,
-            height: 135,
+            width: width,
+            height: height,
           ),
         ),
       ),
