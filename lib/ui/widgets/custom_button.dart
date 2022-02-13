@@ -8,6 +8,8 @@ class CustomButton extends StatelessWidget {
   final EdgeInsets margin;
   final bool transparent;
   final double? heightSize;
+  final double fontSize;
+  final double borderRadius;
 
   const CustomButton({
     Key? key,
@@ -17,6 +19,9 @@ class CustomButton extends StatelessWidget {
     this.heightSize = 55,
     this.margin = EdgeInsets.zero,
     this.transparent = false,
+    this.fontSize = 18,
+    this.borderRadius = 10,
+
   }) : super(key: key);
 
   @override
@@ -28,18 +33,24 @@ class CustomButton extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          backgroundColor:
-              !transparent ? kPrimaryColor : kPrimaryColor.withOpacity(0.05),
+          backgroundColor: !transparent
+              ? kPrimaryColor
+              : kPrimaryColor.withOpacity(
+                  0.05,
+                ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(borderRadius),
             side: BorderSide(
-                color: kPrimaryColor, width: 1, style: BorderStyle.solid),
+              color: kPrimaryColor,
+              width: 1,
+              style: BorderStyle.solid,
+            ),
           ),
         ),
         child: Text(
           title,
           style: whiteTextStyle.copyWith(
-            fontSize: 18,
+            fontSize: fontSize,
             fontWeight: medium,
           ),
         ),

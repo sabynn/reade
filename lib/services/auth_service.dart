@@ -31,17 +31,23 @@ class AuthService {
     required gender,
     required education,
     required interests,
-    profileImage = "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+    profileImage =
+        "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     sentimentScores = const [],
     toneScores = const [],
     eyeVisibilityScores = const [],
     smilingScores = const [],
     fileRecentInterview = "",
     fileExpectedAnswer = "",
+    schedule = const [],
+    videoFile = const [],
   }) async {
     try {
-      UserCredential userCredential = await _auth
-          .createUserWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
       UserModel user = UserModel(
         id: userCredential.user!.uid,
@@ -58,6 +64,8 @@ class AuthService {
         smilingScores: smilingScores,
         fileRecentInterview: fileRecentInterview,
         fileExpectedAnswer: fileExpectedAnswer,
+        schedule: schedule,
+        videoFile: videoFile,
       );
 
       await UserService().setUser(user);
@@ -71,6 +79,14 @@ class AuthService {
   Future<void> signOut() async {
     try {
       await _auth.signOut();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateUserData(UserModel user) async {
+    try {
+      await UserService().updateUserData(user);
     } catch (e) {
       rethrow;
     }

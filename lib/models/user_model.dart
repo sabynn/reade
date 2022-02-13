@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 class UserModel extends Equatable {
@@ -14,8 +13,10 @@ class UserModel extends Equatable {
   final List<dynamic> toneScores;
   final List<dynamic> eyeVisibilityScores;
   final List<dynamic> smilingScores;
+  final List<dynamic> schedule;
   final dynamic fileRecentInterview;
   final dynamic fileExpectedAnswer;
+  final List<dynamic> videoFile;
 
   const UserModel({
     required this.id,
@@ -32,7 +33,27 @@ class UserModel extends Equatable {
     this.smilingScores = const [0.0],
     this.fileRecentInterview = "",
     this.fileExpectedAnswer = "",
+    this.schedule = const [],
+    this.videoFile = const [],
   });
+
+  factory UserModel.fromJson(String id, Map<String, dynamic> json) => UserModel(
+      email: json["email"],
+      name: json["name"],
+      dateOfBirth: json["dateOfBirth"],
+      gender: json["gender"],
+      education: json["education"],
+      profileImage: json["profileImage"],
+      interests: json["interests"],
+      sentimentScores: json["sentimentScores"],
+      toneScores: json["toneScores"],
+      eyeVisibilityScores: json["eyeVisibilityScores"],
+      smilingScores: json["smilingScores"],
+      fileRecentInterview: json["fileRecentInterview"],
+      fileExpectedAnswer: json["fileExpectedAnswer"],
+      schedule: json["schedule"],
+      videoFile: json["videoFile"],
+      id: id);
 
   @override
   List<Object?> get props => [
@@ -50,5 +71,7 @@ class UserModel extends Equatable {
         smilingScores,
         fileRecentInterview,
         fileExpectedAnswer,
+        schedule,
+        videoFile,
       ];
 }

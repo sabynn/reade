@@ -21,6 +21,8 @@ class UserService {
         'smilingScores': user.smilingScores,
         'fileRecentInterview': user.fileRecentInterview,
         'fileExpectedAnswer': user.fileExpectedAnswer,
+        'schedule': user.schedule,
+        'videoFile': user.videoFile,
       });
     } catch (e) {
       rethrow;
@@ -45,6 +47,8 @@ class UserService {
         smilingScores: snapshot['smilingScores'],
         fileRecentInterview: snapshot['fileRecentInterview'],
         fileExpectedAnswer: snapshot['fileExpectedAnswer'],
+        schedule: snapshot['schedule'],
+        videoFile: snapshot['videoFile'],
       );
     } catch (e) {
       rethrow;
@@ -67,6 +71,8 @@ class UserService {
         'smilingScores': user.smilingScores,
         'fileRecentInterview': user.fileRecentInterview,
         'fileExpectedAnswer': user.fileExpectedAnswer,
+        'schedule': user.schedule,
+        'videoFile': user.videoFile,
       });
     } catch (e) {
       rethrow;

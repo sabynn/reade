@@ -29,13 +29,16 @@ class AuthCubit extends Cubit<AuthState> {
     required gender,
     required education,
     required interests,
-    profileImage = "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+    profileImage =
+        "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     sentimentScores = const [],
     toneScores = const [],
     eyeVisibilityScores = const [],
     smilingScores = const [],
     fileRecentInterview = "",
     fileExpectedAnswer = "",
+    schedule = const [],
+    videoFile = const [],
   }) async {
     try {
       emit(AuthLoading());
@@ -55,6 +58,8 @@ class AuthCubit extends Cubit<AuthState> {
         smilingScores: smilingScores,
         fileRecentInterview: fileRecentInterview,
         fileExpectedAnswer: fileExpectedAnswer,
+        schedule: schedule,
+        videoFile: videoFile,
       );
       emit(AuthSuccess(user));
     } catch (e) {
@@ -76,6 +81,18 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       UserModel user = await UserService().getUserById(id);
       emit(AuthSuccess(user));
+    } catch (e) {
+      emit(AuthFailed(e.toString()));
+    }
+  }
+
+  void updateUserData({
+    required UserModel userUpdate
+  }) async {
+    try {
+      emit(AuthLoading());
+      await AuthService().updateUserData(userUpdate);
+      emit(AuthSuccess(userUpdate));
     } catch (e) {
       emit(AuthFailed(e.toString()));
     }

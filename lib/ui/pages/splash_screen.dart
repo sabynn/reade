@@ -37,7 +37,6 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: kBackgroundColor,
       body: Stack(
         children: [
           Container(
@@ -47,7 +46,7 @@ class _SplashPageState extends State<SplashPage> {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage(
-                  'images/background_image.png',
+                  'assets/images/background_image.png',
                 ),
               ),
             ),
@@ -63,7 +62,7 @@ class _SplashPageState extends State<SplashPage> {
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(
-                        'images/logo_reade.png',
+                        'assets/images/logo_reade.png',
                       ),
                     ),
                   ),
