@@ -39,7 +39,7 @@ class AuthService {
     smilingScores = const [],
     fileRecentInterview = "",
     fileExpectedAnswer = "",
-    schedule = "",
+    schedule = const [],
   }) async {
     try {
       UserCredential userCredential =

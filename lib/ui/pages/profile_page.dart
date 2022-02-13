@@ -189,7 +189,7 @@ class _ProfilePageState extends State<ProfilePage> {
 }
 
 Widget buildText(String title, String isi, String space) => Container(
-    padding: EdgeInsets.symmetric(horizontal: 30),
+    padding: EdgeInsets.symmetric(horizontal: 10),
     child: Row(
       children: [
         Text(
@@ -202,7 +202,7 @@ Widget buildText(String title, String isi, String space) => Container(
     ));
 
 Widget buildInterests(UserModel user) => Container(
-      padding: EdgeInsets.symmetric(horizontal: 29),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
           Text(
@@ -212,13 +212,16 @@ Widget buildInterests(UserModel user) => Container(
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 30),
-          Wrap(children: <Widget>[
-            for (int i = 0;
-                i <= user.interests.lastIndexWhere((element) => true);
-                i++)
-              (buildChip(user.interests[i], Color(0xffacbbe0)))
-          ]),
+          const SizedBox(height: 35),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+            child: Wrap(children: <Widget>[
+              for (int i = 0;
+                  i <= user.interests.lastIndexWhere((element) => true);
+                  i++)
+                (buildChip(user.interests[i], Color(0xffacbbe0)))
+            ]),
+          ),
         ],
       ),
     );
@@ -245,7 +248,7 @@ Widget buildChip(String label, Color color) => Container(
     );
 
 Widget buildResume() => Container(
-    padding: EdgeInsets.symmetric(horizontal: 30),
+    padding: EdgeInsets.symmetric(horizontal: 10),
     child: Row(
       children: [
         Text(

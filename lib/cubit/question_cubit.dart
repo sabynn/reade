@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import '../models/question_model.dart';
 import '../services/question_service.dart';
 part 'question_state.dart';
+
 class QuestionCubit extends Cubit<QuestionState> {
   QuestionCubit() : super(QuestionInitial());
 

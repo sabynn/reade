@@ -21,6 +21,7 @@ class UserService {
         'smilingScores': user.smilingScores,
         'fileRecentInterview': user.fileRecentInterview,
         'fileExpectedAnswer': user.fileExpectedAnswer,
+        'schedule': user.schedule,
       });
     } catch (e) {
       rethrow;

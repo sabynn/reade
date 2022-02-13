@@ -61,7 +61,6 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
 
-
     Widget widgetGetImage() {
       return Align(
         alignment: Alignment.center,
