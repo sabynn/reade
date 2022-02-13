@@ -9,6 +9,8 @@ import '../widgets/button_widget.dart';
 import '../widgets/edit_profile_widget.dart';
 
 class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({Key? key}) : super(key: key);
+
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
@@ -125,20 +127,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  Widget buildResumeField() => Container(
-        child: Row(
-          children: [
-            Text(
-              'Resume     ',
-              style: TextStyle(fontSize: 15.5, color: Colors.black),
-            ),
-            buildChooseFile(),
-            SizedBox(width: 10),
-            buildUploadButton(),
-            const SizedBox(height: 38),
-          ],
-        ),
-      );
+  Widget buildResumeField() => Row(
+    children: [
+      const Text(
+        'Resume     ',
+        style: TextStyle(fontSize: 15.5, color: Colors.black),
+      ),
+      buildChooseFile(),
+      SizedBox(width: 10),
+      buildUploadButton(),
+      const SizedBox(height: 38),
+    ],
+  );
 
   Widget buildChooseFile() => ButtonWidget(
         fontSize: 16,

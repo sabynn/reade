@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 AppBar buildAppBar(BuildContext context, String text, var page) {
   return AppBar(
     leading: IconButton(
-      icon: Icon(
+      icon: const Icon(
         Icons.arrow_back,
         color: Color(0xff2545b4),
         size: 20,
@@ -16,12 +15,12 @@ AppBar buildAppBar(BuildContext context, String text, var page) {
     ),
     title: Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.bold,
       ),
     ),
-    foregroundColor: Color(0xff2545b4),
+    foregroundColor: const Color(0xff2545b4),
     backgroundColor: Colors.transparent,
     elevation: 0,
   );

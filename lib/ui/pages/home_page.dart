@@ -22,7 +22,6 @@ class _HomePageState extends State<HomePage> {
       return BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           if (state is AuthSuccess) {
-            print(state.user);
             return Container(
               margin: EdgeInsets.only(
                 left: 35,

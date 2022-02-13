@@ -1,11 +1,10 @@
-import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reade/cubit/auth_cubit.dart';
 import 'package:reade/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../models/user_model.dart';
 import '../widgets/chart_analysis.dart';
 import '../widgets/chart_analysis_sentiment.dart';
 import '../widgets/custom_app_bar.dart';
@@ -50,7 +49,9 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
     String path = videos[videos.length-1];
     bool? saveVid =
         await GallerySaver.saveVideo(path, albumName: "Interview");
-    print('Video recorded to ${path} $saveVid');
+    if (kDebugMode) {
+      print('Video recorded to $path $saveVid');
+    }
   }
 
   @override

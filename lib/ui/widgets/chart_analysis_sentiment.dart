@@ -34,7 +34,7 @@ class _ChartAnalysisSentimentState extends State<ChartAnalysisSentiment> {
           aspectRatio: 1.70,
           child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(18),
                 ),
                 color: kDarkColor),

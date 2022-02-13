@@ -24,7 +24,7 @@ class _ChartAnalysisState extends State<ChartAnalysis> {
             aspectRatio: 1.70,
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(18),
                   ),
                   color: kDarkColor),
@@ -110,7 +110,7 @@ class _ChartAnalysisState extends State<ChartAnalysis> {
       lineBarsData: [
         LineChartBarData(
           spots: [
-            FlSpot(0, 0),
+            const FlSpot(0, 0),
             FlSpot(3, widget.arrayScores.length > 3 ? widget.arrayScores[widget.arrayScores.length-3].toDouble() : 0,),
             FlSpot(6, widget.arrayScores.length > 2 ? widget.arrayScores[widget.arrayScores.length-2].toDouble() : 0),
             FlSpot(9, widget.arrayScores[widget.arrayScores.length-1].toDouble()),

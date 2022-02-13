@@ -9,6 +9,7 @@ import '../widgets/button_widget.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/profile_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MeetingBoardPage extends StatefulWidget {
   List<Meeting?> meetingSchedule = [];
@@ -23,15 +24,18 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   late UserModel userModel;
   late bool doneSave = false;
-  Map<String?, dynamic> detailMeeting = Map();
+  Map<String?, dynamic> detailMeeting = {};
   List<String> usersPartner = [];
+
+  void _launchURL(String url) async {
+    if (!await launch(url)) throw 'Could not launch $url';
+  }
 
   Widget buildButton(BuildContext context, UserModel user) => ButtonWidget(
         fontSize: 14,
         text: 'Save Meeting',
         onClicked: () {
           context.read<AuthCubit>().updateUserData(userUpdate: user);
-          print("SAVED!");
           Navigator.pushNamed(context, "/home");
         },
       );
@@ -62,13 +66,13 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
         color: Colors.white,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: new BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(10.0),
             gradient: LinearGradient(
               colors: [
                 kWhiteColor,
-                Color(0xffebf1f8),
-                Color(0xffebf1f8),
-                Color(0xffebf1f8),
+                const Color(0xffebf1f8),
+                const Color(0xffebf1f8),
+                const Color(0xffebf1f8),
                 kWhiteColor,
               ],
               begin: Alignment.topCenter,
@@ -96,7 +100,7 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
                         ),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Icon(
                       Icons.access_alarm,
                       color: kDarkColor,
@@ -114,12 +118,17 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
                   ],
                 ),
                 const SizedBox(width: 20),
-                Text(
-                  meetLinks,
-                  style: darkTextStyle.copyWith(
-                    fontSize: 13,
-                    fontWeight: black,
+                InkWell(
+                  child: Text(
+                    meetLinks,
+                    style: darkTextStyle.copyWith(
+                      fontSize: 13,
+                      fontWeight: black,
+                    ),
                   ),
+                  onTap: (){
+                    _launchURL(meetLinks);
+                  },
                 ),
                 const SizedBox(width: 20),
                 Row(
@@ -146,7 +155,7 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
                     future: fetchUser(userIdPartner),
                     builder: (BuildContext context, AsyncSnapshot<List<UserModel>> snapshot) {
                       if (snapshot.hasData) {
-                        return Container(
+                        return SizedBox(
                           width: MediaQuery.of(context).size.width - 50,
                           height: 65,
                           child: ListView.builder(
@@ -195,8 +204,6 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
       }
       detailMeeting["userPartners"] = usersPartner;
     }
-    print("MEET");
-    print(widget.meetingSchedule);
     return Scaffold(
       key: _scaffoldKey,
       drawer: customDrawer(context),
@@ -204,9 +211,8 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
         child: BlocBuilder<AuthCubit, AuthState>(
           builder: (context, state) {
             if (state is AuthSuccess) {
-              print(state.user);
               UserModel user = state.user;
-              if (detailMeeting != null) {
+              if (widget.addMeeting != null) {
                 state.user.schedule.add(detailMeeting);
               }
               return Stack(

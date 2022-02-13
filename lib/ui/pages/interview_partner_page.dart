@@ -10,6 +10,8 @@ import '../widgets/custom_drawer.dart';
 import 'interview_partner_page2.dart';
 
 class InterviewPartnerPage extends StatefulWidget {
+  const InterviewPartnerPage({Key? key}) : super(key: key);
+
   @override
   _InterviewPartnerPageState createState() => _InterviewPartnerPageState();
 }
@@ -92,8 +94,6 @@ class _InterviewPartnerPageState extends State<InterviewPartnerPage> {
               usersPartner.contains(user)
                   ? usersPartner.remove(user)
                   : usersPartner.add(user);
-              print("YESSSS");
-              print(usersPartner);
             });
           },
           iconSize: 10,
@@ -108,7 +108,7 @@ class _InterviewPartnerPageState extends State<InterviewPartnerPage> {
         onClicked: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (BuildContext context) => new InterviewPartnerPage2(
+              builder: (BuildContext context) =>  InterviewPartnerPage2(
                 usersPartner: usersPartner,
               ),
             ),

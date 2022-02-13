@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:reade/cubit/auth_cubit.dart';
 import 'package:reade/ui/widgets/custom_button.dart';
 import 'package:reade/ui/widgets/custom_text_form_field.dart';
@@ -37,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
       TextEditingController(text: '');
 
   late String profileImageLink = "";
-  File? _image = null;
+  File? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,9 @@ class _SignUpPageState extends State<SignUpPage> {
       setState(() {
         _image = File(image!.path);
         uploadPic(context);
-        print('Image Path $_image');
+        if (kDebugMode) {
+          print('Image Path $_image');
+        }
       });
     }
 

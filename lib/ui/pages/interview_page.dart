@@ -55,7 +55,6 @@ class InterviewPageState extends State<InterviewPage> {
         faceAnalysis.scoreRightEyeOpen) /
         (faceAnalysis.countLeftEyeOpen + faceAnalysis.countRightEyeOpen)) *
         100);
-    print(user.videoFile);
     context.read<AuthCubit>().updateUserData(userUpdate: user);
 
     Navigator.pushNamed(context, '/after-interview');
@@ -97,8 +96,6 @@ class InterviewPageState extends State<InterviewPage> {
                         await _interviewController.loadCamera();
                         _interviewController.startImageStream();
                         voiceDetector.startListening();
-                        print("THIS IS QUESTIONS");
-                        print(state.questions);
                         questions = state.questions[0].userInterview;
                         nextQuestion();
                       },
@@ -130,11 +127,9 @@ class InterviewPageState extends State<InterviewPage> {
       floatingActionButton: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           if (state is AuthSuccess) {
-            print(state.user);
             return BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
                 if (state is AuthSuccess) {
-                  print(state.user);
                   return Padding(
                     padding: const EdgeInsets.all(40.0),
                     child: Row(

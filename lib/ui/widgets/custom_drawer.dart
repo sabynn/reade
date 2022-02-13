@@ -21,7 +21,7 @@ Widget customDrawer(context) {
         children: [
           DrawerHeader(
             child: Center(
-              child: Container(
+              child: SizedBox(
                 width: 100,
                 child: Image.asset(
                   'assets/images/logo_reade.png',

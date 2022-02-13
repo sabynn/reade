@@ -175,8 +175,6 @@ class _InterviewPartnerPage2State extends State<InterviewPartnerPage2> {
         fontSize: 14,
         text: 'Confirm',
         onClicked: () {
-          print("INIII USER PARTNER");
-          print(widget.usersPartner);
           Meeting createMeet = Meeting(
             date: dateController.text,
             time: timeController.text,

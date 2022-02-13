@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reade/shared/theme.dart';
 
 class EditProfileWidget extends StatelessWidget {
   final String imagePath;
@@ -10,18 +11,16 @@ class EditProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Center(
       child: Stack(
         children: [
-          buildImage (context),
+          buildImage(context),
         ],
       ),
     );
   }
 
   Widget buildImage(BuildContext context) {
-
     return Center(
       child: Stack(
         children: [
@@ -30,44 +29,47 @@ class EditProfileWidget extends StatelessWidget {
             height: 130,
             decoration: BoxDecoration(
                 border: Border.all(
-                    width: 4,
-                    color: Theme.of(context).scaffoldBackgroundColor),
+                    width: 4, color: Theme.of(context).scaffoldBackgroundColor),
                 boxShadow: [
                   BoxShadow(
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                      color: Colors.black.withOpacity(0.1),
-                      offset: Offset(0, 10))
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    color: Colors.black.withOpacity(0.1),
+                    offset: const Offset(
+                      0,
+                      10,
+                    ),
+                  )
                 ],
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                        imagePath
-                    ))),
+                    fit: BoxFit.cover, image: NetworkImage(imagePath))),
           ),
           Positioned(
-              bottom: 0,
-              right: 0,
-              child: Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    width: 2,
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                  ),
-                  color: Color(0xff425bb3),
+            bottom: 0,
+            right: 0,
+            child: Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  width: 2,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                 ),
-                child: IconButton(
-                    icon : Icon(Icons.camera, color : Colors.white),
-                    iconSize: 30,
-                    padding: EdgeInsets.all(1),
-                    onPressed : (){},
-                  ),
-                ),
+                color: kDarkColor,
               ),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.camera,
+                  color: Colors.white,
+                ),
+                iconSize: 30,
+                padding: const EdgeInsets.all(1),
+                onPressed: () {},
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -44,19 +44,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       imagePath: user.profileImage,
                     ),
                     const SizedBox(height: 38),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SizedBox(
-                            width: 10,
-                          ),
-                          buildEditButton(),
-                          buildEditIcon(
-                            kDarkColor,
-                          ),
-                        ],
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        buildEditButton(),
+                        buildEditIcon(
+                          kDarkColor,
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
@@ -225,32 +223,30 @@ Widget buildInterests(UserModel user) => Container(
       ),
     );
 
-Widget buildChip(String label, Color color) => Container(
-      child: Chip(
-        labelPadding: EdgeInsets.all(2.0),
-        label: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: Color(0xff3b56b3),
-              fontSize: 14,
-              letterSpacing: 1,
-            ),
-          ),
-        ),
-        backgroundColor: color,
-        elevation: 4,
-        shadowColor: Colors.grey[50],
-        padding: EdgeInsets.all(4),
+Widget buildChip(String label, Color color) => Chip(
+  labelPadding: EdgeInsets.all(2.0),
+  label: Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Text(
+      label,
+      style: TextStyle(
+        color: Color(0xff3b56b3),
+        fontSize: 14,
+        letterSpacing: 1,
       ),
-    );
+    ),
+  ),
+  backgroundColor: color,
+  elevation: 4,
+  shadowColor: Colors.grey[50],
+  padding: const EdgeInsets.all(4),
+);
 
 Widget buildResume() => Container(
     padding: EdgeInsets.symmetric(horizontal: 10),
     child: Row(
       children: [
-        Text(
+        const Text(
           'Resume                 ',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
