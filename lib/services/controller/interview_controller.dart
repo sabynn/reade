@@ -37,7 +37,9 @@ class InterviewController extends GetxController {
     final CameraController? camController = cameraController;
 
     if (camController == null || !camController.value.isInitialized) {
-      print('Error: select a camera first.');
+      if (kDebugMode) {
+        print('Error: select a camera first.');
+      }
       return;
     }
 
@@ -49,7 +51,9 @@ class InterviewController extends GetxController {
     try {
       cameraController?.startVideoRecording();
     } on CameraException catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
       return;
     }
   }
@@ -64,7 +68,9 @@ class InterviewController extends GetxController {
     try {
       return camController.stopVideoRecording();
     } on CameraException catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
       return null;
     }
   }
@@ -79,7 +85,9 @@ class InterviewController extends GetxController {
     try {
       return camController.stopImageStream();
     } on CameraException catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
       return;
     }
   }
@@ -133,8 +141,10 @@ class InterviewController extends GetxController {
   }
 
   Future<void> processImage(inputImage) async {
-    await Future.delayed(Duration(seconds: 5));
-    print("Detection");
+    await Future.delayed(const Duration(seconds: 5));
+    if (kDebugMode) {
+      print("Detection");
+    }
     faces = await _faceDetect?.processImage(inputImage);
 
     if (faces != null && faces!.isNotEmpty) {
@@ -143,7 +153,9 @@ class InterviewController extends GetxController {
       detectLeftEye(face?.leftEyeOpen);
       detectRightEye(face?.rightEyeOpen);
     } else {
-      print("NO FACE DETECTED");
+      if (kDebugMode) {
+        print("NO FACE DETECTED");
+      }
     }
     _isDetecting = false;
     update();

@@ -177,9 +177,9 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
                           ),
                         );
                       } else if (snapshot.hasError) {
-                        return SizedBox();
+                        return const SizedBox();
                       } else {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
                     },
                   ),
@@ -231,7 +231,7 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
                   ),
                   ListView(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     children: [
                       customAppBar(
                         context,
@@ -257,7 +257,7 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
                               padding: const EdgeInsets.all(30.0),
                               child: buildButton(context, user),
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                     ],
                   ),
                 ],

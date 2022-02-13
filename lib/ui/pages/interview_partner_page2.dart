@@ -31,14 +31,14 @@ class _InterviewPartnerPage2State extends State<InterviewPartnerPage2> {
       appBar: buildAppBar(
         context,
         'Interview Partner',
-        InterviewPartnerPage(),
+        const InterviewPartnerPage(),
       ),
       body: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           if (state is AuthSuccess) {
             return ListView(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               children: [
                 const SizedBox(height: 20),
                 const Text(
@@ -137,7 +137,7 @@ class _InterviewPartnerPage2State extends State<InterviewPartnerPage2> {
             height: 3,
           ),
           TextFormField(
-            cursorColor: Color(0xffa9bbea),
+            cursorColor: const Color(0xffa9bbea),
             controller: controller,
             decoration: InputDecoration(
               hintText: hintText,
