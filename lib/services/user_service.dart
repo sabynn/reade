@@ -22,6 +22,7 @@ class UserService {
         'fileRecentInterview': user.fileRecentInterview,
         'fileExpectedAnswer': user.fileExpectedAnswer,
         'schedule': user.schedule,
+        'videoFile': user.videoFile,
       });
     } catch (e) {
       rethrow;
@@ -47,6 +48,7 @@ class UserService {
         fileRecentInterview: snapshot['fileRecentInterview'],
         fileExpectedAnswer: snapshot['fileExpectedAnswer'],
         schedule: snapshot['schedule'],
+        videoFile: snapshot['videoFile'],
       );
     } catch (e) {
       rethrow;
@@ -70,6 +72,7 @@ class UserService {
         'fileRecentInterview': user.fileRecentInterview,
         'fileExpectedAnswer': user.fileExpectedAnswer,
         'schedule': user.schedule,
+        'videoFile': user.videoFile,
       });
     } catch (e) {
       rethrow;

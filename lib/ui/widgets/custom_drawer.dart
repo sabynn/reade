@@ -90,7 +90,12 @@ Widget customDrawer(context) {
               color: kDarkColor,
               size: 30.0,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                "/analytics",
+              );
+            },
           ),
           ListTile(
             title: Text(

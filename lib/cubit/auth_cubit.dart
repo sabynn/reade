@@ -38,6 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
     fileRecentInterview = "",
     fileExpectedAnswer = "",
     schedule = const [],
+    videoFile = const [],
   }) async {
     try {
       emit(AuthLoading());
@@ -58,6 +59,7 @@ class AuthCubit extends Cubit<AuthState> {
         fileRecentInterview: fileRecentInterview,
         fileExpectedAnswer: fileExpectedAnswer,
         schedule: schedule,
+        videoFile: videoFile,
       );
       emit(AuthSuccess(user));
     } catch (e) {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reade/cubit/all_user_cubit.dart';
 import 'package:reade/ui/pages/after_interview_page.dart';
+import 'package:reade/ui/pages/analytics_page.dart';
 import 'package:reade/ui/pages/get_started_page.dart';
 import 'package:reade/ui/pages/home_page.dart';
 import 'package:reade/ui/pages/interview_page.dart';
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
           '/profile-page': (context) => const ProfilePage(),
           '/interview-partner': (context) => InterviewPartnerPage(),
           '/meeting-boards': (context) => MeetingBoardPage(),
+          '/analytics': (context) => AnalyticsPage(),
         },
       ),
     );

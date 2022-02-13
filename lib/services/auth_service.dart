@@ -40,6 +40,7 @@ class AuthService {
     fileRecentInterview = "",
     fileExpectedAnswer = "",
     schedule = const [],
+    videoFile = const [],
   }) async {
     try {
       UserCredential userCredential =
@@ -64,6 +65,7 @@ class AuthService {
         fileRecentInterview: fileRecentInterview,
         fileExpectedAnswer: fileExpectedAnswer,
         schedule: schedule,
+        videoFile: videoFile,
       );
 
       await UserService().setUser(user);

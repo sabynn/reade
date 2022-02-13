@@ -50,6 +50,7 @@ dependencies:
   gallery_saver: ^2.3.2
   dart_sentiment: ^0.0.9
   flutter_tts: ^3.3.3
+  fl_chart: ^0.45.0
 
 dev_dependencies:
   flutter_test:

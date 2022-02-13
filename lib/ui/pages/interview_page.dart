@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
 import 'package:reade/models/face_analysis.dart';
 import 'package:reade/models/user_model.dart';
@@ -17,13 +16,12 @@ class InterviewPage extends StatefulWidget {
   const InterviewPage({Key? key}) : super(key: key);
 
   @override
-  State<InterviewPage> createState() => _InterviewPageState();
+  State<InterviewPage> createState() => InterviewPageState();
 }
 
-class _InterviewPageState extends State<InterviewPage> {
+class InterviewPageState extends State<InterviewPage> {
   final _interviewController = InterviewController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  XFile? videoFile;
   VoiceDetector voiceDetector = VoiceDetector();
   QuestionVoice questionVoice = QuestionVoice();
   List<dynamic>? questions;
@@ -39,15 +37,11 @@ class _InterviewPageState extends State<InterviewPage> {
     questionVoice.speak();
   }
 
-
   void endInterview(UserModel user) {
     _interviewController.stopVideoRecording().then((file) async {
       if (mounted) setState(() {});
       if (file != null) {
-        bool? saveVid =
-        await GallerySaver.saveVideo(file.path, albumName: "Interview");
-        print('Video recorded to ${file.path} $saveVid');
-        videoFile = file;
+        user.videoFile.add(file.path);
       }
       _interviewController.stopImageStream();
     });
@@ -61,6 +55,7 @@ class _InterviewPageState extends State<InterviewPage> {
         faceAnalysis.scoreRightEyeOpen) /
         (faceAnalysis.countLeftEyeOpen + faceAnalysis.countRightEyeOpen)) *
         100);
+    print(user.videoFile);
     context.read<AuthCubit>().updateUserData(userUpdate: user);
 
     Navigator.pushNamed(context, '/after-interview');

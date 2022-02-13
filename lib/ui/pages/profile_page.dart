@@ -35,7 +35,6 @@ class _ProfilePageState extends State<ProfilePage> {
           BlocBuilder<AuthCubit, AuthState>(
             builder: (context, state) {
               if (state is AuthSuccess) {
-                print(state.user);
                 UserModel user = state.user;
                 return ListView(
                   physics: BouncingScrollPhysics(),
