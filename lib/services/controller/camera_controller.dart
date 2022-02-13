@@ -15,13 +15,11 @@ class CameraManager {
       enableAudio: true,
     );
     cameraDescription = _controller?.description;
-    print("HERE WE GO AGAIN");
     await _controller?.initialize();
     return _controller;
   }
 
   Future<CameraController?> changeCamera() async {
-    print("HEHE KESINIII");
     cameras = await availableCameras();
     final lensDirection =  _controller?.description.lensDirection;
     CameraDescription newDescription;

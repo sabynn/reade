@@ -37,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
               if (state is AuthSuccess) {
                 UserModel user = state.user;
                 return ListView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   children: [
                     const SizedBox(height: 50),
                     ProfileWidget(
@@ -47,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         buildEditButton(),
@@ -118,14 +118,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: kBackgroundColor,
                     child: BackButton(
                       color: kDarkColor,
-                      onPressed: (){
+                      onPressed: () {
                         Navigator.pushNamed(context, "/home");
                       },
                     ),
                   ),
                 ),
               ),
-              Spacer(
+              const Spacer(
                 flex: 1,
               ),
               Text(
@@ -135,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   fontWeight: bold,
                 ),
               ),
-              Spacer(
+              const Spacer(
                 flex: 2,
               )
             ],
@@ -151,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
         onClicked: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (BuildContext context) => EditProfilePage(),
+              builder: (BuildContext context) => const EditProfilePage(),
             ),
           );
         },
@@ -186,23 +186,26 @@ class _ProfilePageState extends State<ProfilePage> {
 }
 
 Widget buildText(String title, String isi, String space) => Container(
-    padding: EdgeInsets.symmetric(horizontal: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 10),
     child: Row(
       children: [
         Text(
           title + space,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        Text(isi, style: TextStyle(fontSize: 16)),
+        Text(isi, style: const TextStyle(fontSize: 16)),
         const SizedBox(height: 45),
       ],
     ));
 
 Widget buildInterests(UserModel user) => Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
-          Text(
+          const Text(
             'Interests           ',
             style: TextStyle(
               fontSize: 16,
@@ -211,12 +214,12 @@ Widget buildInterests(UserModel user) => Container(
           ),
           const SizedBox(height: 35),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
             child: Wrap(children: <Widget>[
               for (int i = 0;
                   i <= user.interests.lastIndexWhere((element) => true);
                   i++)
-                (buildChip(user.interests[i], Color(0xffacbbe0)))
+                (buildChip(user.interests[i], const Color(0xffacbbe0)))
             ]),
           ),
         ],
@@ -224,26 +227,26 @@ Widget buildInterests(UserModel user) => Container(
     );
 
 Widget buildChip(String label, Color color) => Chip(
-  labelPadding: EdgeInsets.all(2.0),
-  label: Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Text(
-      label,
-      style: TextStyle(
-        color: Color(0xff3b56b3),
-        fontSize: 14,
-        letterSpacing: 1,
+      labelPadding: const EdgeInsets.all(2.0),
+      label: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          label,
+          style: const TextStyle(
+            color: Color(0xff3b56b3),
+            fontSize: 14,
+            letterSpacing: 1,
+          ),
+        ),
       ),
-    ),
-  ),
-  backgroundColor: color,
-  elevation: 4,
-  shadowColor: Colors.grey[50],
-  padding: const EdgeInsets.all(4),
-);
+      backgroundColor: color,
+      elevation: 4,
+      shadowColor: Colors.grey[50],
+      padding: const EdgeInsets.all(4),
+    );
 
 Widget buildResume() => Container(
-    padding: EdgeInsets.symmetric(horizontal: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 10),
     child: Row(
       children: [
         const Text(

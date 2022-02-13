@@ -85,7 +85,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.bold,
                           fontSize: 26,
-                          color: Color(0xFF002884),
+                          color: kDarkColor,
                         ),
                       ),
                     ),
@@ -103,9 +103,9 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                               shape: BoxShape.circle,
                               gradient: LinearGradient(
                                 colors: [
-                                  Color(0xffFAFAFF).withOpacity(0.3),
-                                  Color(0xffFAFAFF).withOpacity(0.3),
-                                  Color(0xffffffff).withOpacity(0.3),
+                                  const Color(0xffFAFAFF).withOpacity(0.3),
+                                  const Color(0xffFAFAFF).withOpacity(0.3),
+                                  const Color(0xffffffff).withOpacity(0.3),
                                 ],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
@@ -226,7 +226,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                                         fontWeight: bold,
                                       ),
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     Padding(
                                       padding: const EdgeInsets.all(5.0),
                                       child: IconButton(
@@ -311,7 +311,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                                         fontWeight: bold,
                                       ),
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     Padding(
                                       padding: const EdgeInsets.all(5.0),
                                       child: Icon(

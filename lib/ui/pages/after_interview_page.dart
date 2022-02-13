@@ -73,7 +73,6 @@ class AfterInterviewPage extends StatelessWidget {
             child: BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
                 if (state is AuthSuccess) {
-                  print(state.user);
                   user = state.user;
                   return ListView(
                     padding: EdgeInsets.symmetric(

@@ -59,9 +59,9 @@ class MyApp extends StatelessWidget {
           '/interview-page': (context) => const InterviewPage(),
           '/after-interview': (context) => AfterInterviewPage(),
           '/profile-page': (context) => const ProfilePage(),
-          '/interview-partner': (context) => InterviewPartnerPage(),
+          '/interview-partner': (context) => const InterviewPartnerPage(),
           '/meeting-boards': (context) => MeetingBoardPage(),
-          '/analytics': (context) => AnalyticsPage(),
+          '/analytics': (context) => const AnalyticsPage(),
         },
       ),
     );

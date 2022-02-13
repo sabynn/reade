@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reade/shared/theme.dart';
 import 'package:reade/ui/pages/profile_page.dart';
 
 import '../../cubit/auth_cubit.dart';
@@ -22,14 +23,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
       appBar: buildAppBar(
         context,
         'Edit Profile',
-        ProfilePage(),
+        const ProfilePage(),
       ),
       body: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           if (state is AuthSuccess) {
             UserModel user = state.user;
             return Container(
-              padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+              padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
               child: GestureDetector(
                 onTap: () {
                   FocusScope.of(context).unfocus();
@@ -39,7 +40,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     EditProfileWidget(
                       imagePath: user.profileImage,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 35,
                     ),
                     buildTextField("Full Name", user.name),
@@ -49,14 +50,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     buildTextField("Email", user.email),
                     buildTextField("Interests", user.interests.join(",")),
                     buildResumeField(),
-                    SizedBox(
+                    const SizedBox(
                       height: 35,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         OutlineButton(
-                          padding: EdgeInsets.symmetric(horizontal: 50),
+                          padding: const EdgeInsets.symmetric(horizontal: 50),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
                           onPressed: (() => Navigator.pushReplacement(
@@ -66,24 +67,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       const ProfilePage(),
                                 ),
                               )),
-                          child: Text("CANCEL",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  letterSpacing: 2.2,
-                                  color: Colors.black)),
+                          child: const Text(
+                            "CANCEL",
+                            style: TextStyle(
+                              fontSize: 14,
+                              letterSpacing: 2.2,
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
                         RaisedButton(
                           onPressed: (() => Navigator.push(
-                              context,
-                              MaterialPageRoute(
+                                context,
+                                MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      ProfilePage()))),
-                          color: Color(0xff2545b4),
-                          padding: EdgeInsets.symmetric(horizontal: 50),
+                                      const ProfilePage(),
+                                ),
+                              )),
+                          color: kPrimaryColor,
+                          padding: const EdgeInsets.symmetric(horizontal: 50),
                           elevation: 2,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
-                          child: Text(
+                          child: const Text(
                             "SAVE",
                             style: TextStyle(
                                 fontSize: 14,
@@ -91,7 +97,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 color: Colors.white),
                           ),
                         ),
-                        SizedBox(height: 100),
+                        const SizedBox(height: 100),
                       ],
                     )
                   ],
@@ -111,15 +117,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
       padding: const EdgeInsets.only(bottom: 35.0),
       child: TextField(
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(bottom: 3),
+            contentPadding: const EdgeInsets.only(bottom: 3),
             labelText: labelText,
-            labelStyle: TextStyle(
+            labelStyle: const TextStyle(
               fontSize: 20,
               color: Colors.black,
             ),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               fontSize: 16,
               color: Colors.black12,
             )),
@@ -128,17 +134,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   Widget buildResumeField() => Row(
-    children: [
-      const Text(
-        'Resume     ',
-        style: TextStyle(fontSize: 15.5, color: Colors.black),
-      ),
-      buildChooseFile(),
-      SizedBox(width: 10),
-      buildUploadButton(),
-      const SizedBox(height: 38),
-    ],
-  );
+        children: [
+          const Text(
+            'Resume     ',
+            style: TextStyle(fontSize: 15.5, color: Colors.black),
+          ),
+          buildChooseFile(),
+          const SizedBox(width: 10),
+          buildUploadButton(),
+          const SizedBox(height: 38),
+        ],
+      );
 
   Widget buildChooseFile() => ButtonWidget(
         fontSize: 16,

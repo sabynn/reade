@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io' show Platform;
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show kDebugMode, kIsWeb;
 import 'package:flutter_tts/flutter_tts.dart';
 
 enum TtsState { playing, stopped, paused, continued }
@@ -15,7 +15,6 @@ class QuestionVoice {
   bool isCurrentLanguageInstalled = false;
 
   String? _newVoiceText;
-  int? _inputLength;
 
   TtsState ttsState = TtsState.stopped;
 
@@ -43,14 +42,13 @@ class QuestionVoice {
       }
     }
   }
-  Future<dynamic> _getLanguages() => flutterTts.getLanguages;
-
-  Future<dynamic> _getEngines() => flutterTts.getEngines;
 
   Future _getDefaultEngine() async {
     var engine = await flutterTts.getDefaultEngine;
     if (engine != null) {
-      print(engine);
+      if (kDebugMode) {
+        print(engine);
+      }
     }
   }
 
@@ -64,34 +62,46 @@ class QuestionVoice {
     }
 
     flutterTts.setStartHandler(() {
-        print("Playing");
+        if (kDebugMode) {
+          print("Playing");
+        }
         ttsState = TtsState.playing;
     });
 
     flutterTts.setCompletionHandler(() {
-        print("Complete");
+        if (kDebugMode) {
+          print("Complete");
+        }
         ttsState = TtsState.stopped;
     });
 
     flutterTts.setCancelHandler(() {
-        print("Cancel");
+        if (kDebugMode) {
+          print("Cancel");
+        }
         ttsState = TtsState.stopped;
     });
 
     if (isWeb || isIOS) {
       flutterTts.setPauseHandler(() {
-          print("Paused");
+          if (kDebugMode) {
+            print("Paused");
+          }
           ttsState = TtsState.paused;
       });
 
       flutterTts.setContinueHandler(() {
-          print("Continued");
+          if (kDebugMode) {
+            print("Continued");
+          }
           ttsState = TtsState.continued;
       });
     }
 
     flutterTts.setErrorHandler((msg) {
-        print("error: $msg");
+        if (kDebugMode) {
+          print("error: $msg");
+        }
         ttsState = TtsState.stopped;
     });
   }

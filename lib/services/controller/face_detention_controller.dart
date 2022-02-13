@@ -24,7 +24,6 @@ class FaceDetectorController {
     double? rightEye;
 
     for (Face face in faces!) {
-      final rect = face.boundingBox;
       if (face.smilingProbability != null) {
         smile = face.smilingProbability;
       }

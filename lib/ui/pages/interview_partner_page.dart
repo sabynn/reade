@@ -51,7 +51,7 @@ class _InterviewPartnerPageState extends State<InterviewPartnerPage> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
-                      color: Color(0xff183cbb),
+                      color: kPrimaryColor,
                     ),
                   ),
                   const Spacer(),
@@ -141,7 +141,7 @@ class _InterviewPartnerPageState extends State<InterviewPartnerPage> {
                 ),
                 Center(
                   child: ListView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     children: [
                       customAppBar(
                         context,
