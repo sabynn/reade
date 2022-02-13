@@ -145,7 +145,12 @@ class AfterInterviewPage extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: CustomButton(
                           title: 'See Analytics',
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              "/analytics",
+                            );
+                          },
                           width: 20,
                           heightSize: 45,
                           margin: const EdgeInsets.only(
