@@ -14,5 +14,5 @@ Amygdala
 Reade merupakan artificial intelligence (AI) berbasis aplikasi mobile yang membantu pengguna mendapatkan pengalaman interview secara realtime. Reade hadir untuk menyelesaikan permasalahan yang sering dialami oleh mahasiswa dan fresh graduate dalam menghadapi proses seleksi untuk bekerja ataupun magang, yaitu proses interview. Reade membantu pengguna melatih kemampuan komunikasi, pemecahan masalah, dan diskusi melalui hands-on practice dengan berbagai jenis mock interview yang disesuaikan dengan industri, pekerjaan, dan tingkat pengalaman pengguna.
 
 ## 📱 APK
-to be updated
+[Reade.apk](https://drive.google.com/file/d/1kN3zZT1Fx0neAuDiqATat1It9JTcTRcB/view?usp=sharing)
 
