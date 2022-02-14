@@ -18,129 +18,131 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  'assets/images/background_image.png',
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                    'assets/images/background_image.png',
+                  ),
                 ),
               ),
             ),
-          ),
-          BlocBuilder<AuthCubit, AuthState>(
-            builder: (context, state) {
-              if (state is AuthSuccess) {
-                UserModel user = state.user;
-                return ListView(
-                  physics: const BouncingScrollPhysics(),
-                  children: [
-                    const SizedBox(height: 50),
-                    ProfileWidget(
-                      imagePath: user.profileImage,
-                    ),
-                    const SizedBox(height: 38),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        buildEditButton(),
-                        buildEditIcon(
-                          kDarkColor,
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 10.0,
-                        left: 2.0,
-                        right: 2.0,
+            BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, state) {
+                if (state is AuthSuccess) {
+                  UserModel user = state.user;
+                  return ListView(
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      const SizedBox(height: 50),
+                      ProfileWidget(
+                        imagePath: user.profileImage,
                       ),
-                      child: Card(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: Color(0xff2545b4),
-                            width: 2.0,
+                      const SizedBox(height: 38),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const SizedBox(
+                            width: 10,
                           ),
-                          borderRadius: BorderRadius.circular(15.0),
+                          buildEditButton(),
+                          buildEditIcon(
+                            kDarkColor,
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 10.0,
+                          left: 2.0,
+                          right: 2.0,
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 18),
-                              buildText(
-                                  'Full Name', user.name, '             '),
-                              buildText('Date of Birth', user.dateOfBirth,
-                                  '        '),
-                              buildText(
-                                  'Gender', user.gender, '                  '),
-                              buildText(
-                                  'Education', user.education, '             '),
-                              buildText(
-                                  'Email', user.email, '                     '),
-                              const SizedBox(height: 15),
-                              buildInterests(user),
-                              const SizedBox(height: 25),
-                              buildResume(),
-                              const SizedBox(height: 18),
-                            ],
+                        child: Card(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: Color(0xff2545b4),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 18),
+                                buildText(
+                                    'Full Name', user.name, '             '),
+                                buildText('Date of Birth', user.dateOfBirth,
+                                    '        '),
+                                buildText(
+                                    'Gender', user.gender, '                  '),
+                                buildText(
+                                    'Education', user.education, '             '),
+                                buildText(
+                                    'Email', user.email, '                     '),
+                                const SizedBox(height: 15),
+                                buildInterests(user),
+                                const SizedBox(height: 25),
+                                buildResume(),
+                                const SizedBox(height: 18),
+                              ],
+                            ),
                           ),
                         ),
                       ),
+                    ],
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(
+                        100,
+                      ),
                     ),
-                  ],
-                );
-              } else {
-                return const SizedBox();
-              }
-            },
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(
-                      100,
-                    ),
-                  ),
-                  child: Container(
-                    color: kBackgroundColor,
-                    child: BackButton(
-                      color: kDarkColor,
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/home");
-                      },
+                    child: Container(
+                      color: kBackgroundColor,
+                      child: BackButton(
+                        color: kDarkColor,
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/home");
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const Spacer(
-                flex: 1,
-              ),
-              Text(
-                "Profile",
-                style: darkTextStyle.copyWith(
-                  fontSize: 20,
-                  fontWeight: bold,
+                const Spacer(
+                  flex: 1,
                 ),
-              ),
-              const Spacer(
-                flex: 2,
-              )
-            ],
-          ),
-        ],
+                Text(
+                  "Profile",
+                  style: darkTextStyle.copyWith(
+                    fontSize: 20,
+                    fontWeight: bold,
+                  ),
+                ),
+                const Spacer(
+                  flex: 2,
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
