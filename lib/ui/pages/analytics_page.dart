@@ -46,12 +46,17 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
   }
 
   Future<void> saveVideo(List<dynamic> videos) async {
-    String path = videos[videos.length-1];
-    bool? saveVid =
-        await GallerySaver.saveVideo(path, albumName: "Interview");
+    String path = videos[videos.length - 1];
+    bool? saveVid = await GallerySaver.saveVideo(path, albumName: "Interview");
     if (kDebugMode) {
       print('Video recorded to $path $saveVid');
     }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: kPrimaryColor,
+        content: const Text("File is downloaded successfully"),
+      ),
+    );
   }
 
   @override
@@ -182,7 +187,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                               ),
                             ),
                             Text(
-                              "User Interview",
+                              "HR Interview",
                               style: blueTextStyle.copyWith(
                                 fontSize: 15,
                                 fontWeight: light,
@@ -200,7 +205,6 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                // color: kPrimaryColor.withOpacity(0.1),
                                 child: Row(
                                   children: [
                                     Padding(
@@ -313,12 +317,13 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                                     ),
                                     const Spacer(),
                                     Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Icon(
-                                        Icons.lock,
-                                        color: kDarkColor,
-                                      )
-                                    ),
+                                        padding: const EdgeInsets.only(
+                                          right: 15.0,
+                                        ),
+                                        child: Icon(
+                                          Icons.lock,
+                                          color: kDarkColor,
+                                        )),
                                   ],
                                 ),
                               ),

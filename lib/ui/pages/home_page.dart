@@ -60,10 +60,10 @@ class _HomePageState extends State<HomePage> {
     }
 
     Widget cardInterview(
-      String title,
-      String subTitle,
-      String route,
-    ) {
+        String title,
+        String subTitle,
+        String route,
+        ) {
       return Padding(
         padding: const EdgeInsets.all(10.0),
         child: Card(
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.pushNamed(
                       context,
-                      '/pre-interview',
+                      route,
                     );
                   },
                 ),
@@ -106,11 +106,11 @@ class _HomePageState extends State<HomePage> {
     }
 
     Widget _resourcesCard(
-      String title,
-      String subTitle,
-      String route,
-      BuildContext context,
-    ) {
+        String title,
+        String subTitle,
+        String route,
+        BuildContext context,
+        ) {
       return Padding(
         padding: const EdgeInsets.only(
           left: 14.0,
@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                   CustomButton(
                     onPressed: () {},
                     title: 'Open',
-                    heightSize: 30,
+                    heightSize: 31,
                     width: 100,
                     fontSize: 12,
                   ),
@@ -196,27 +196,27 @@ class _HomePageState extends State<HomePage> {
                     cardInterview(
                       'HR Interview',
                       'Practice how to explain your personality, your strengths, your weaknesses, your capability to handle the role, your background, and compatibility for job.',
-                      'interview-page',
+                      '/pre-interview',
                     ),
                     cardInterview(
                       'User Interview',
                       'Practice how to explain about skill, experiences, and education background.',
-                      'interview-page',
+                      '/pre-interview',
                     ),
                     cardInterview(
                       'Case Interview',
                       'Practice how to explain your personality, your strengths, your weaknesses, your capability to handle the role, your background, and compatibility for job.',
-                      'interview-page',
+                      '/pre-interview',
                     ),
                     cardInterview(
                       'Focus Group Discussion',
                       'Practice how to discuss in small group of people, answer a series of questions and report on the responses led by a moderator ',
-                      'interview-page',
+                      '/interview-partner',
                     ),
                     cardInterview(
                       'Leaderless Group Discussion',
                       'Practice how to discuss in small group of people, answer a series of questions and report on the responses with no identified moderator.',
-                      'interview-page',
+                      '/interview-partner',
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

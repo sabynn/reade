@@ -24,7 +24,7 @@ class ButtonWidget extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
           elevation: 5,
-          padding: const EdgeInsets.symmetric(horizontal: 27, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         ),
 
         child: Text(text),

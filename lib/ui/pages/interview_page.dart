@@ -96,7 +96,7 @@ class InterviewPageState extends State<InterviewPage> {
                         await _interviewController.loadCamera();
                         _interviewController.startImageStream();
                         voiceDetector.startListening();
-                        questions = state.questions[0].userInterview;
+                        questions = state.questions[0].hrInterview;
                         nextQuestion();
                       },
                       builder: (_) {

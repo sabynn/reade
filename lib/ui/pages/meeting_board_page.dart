@@ -35,6 +35,7 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
         fontSize: 14,
         text: 'Save Meeting',
         onClicked: () {
+          widget.addMeeting = null;
           context.read<AuthCubit>().updateUserData(userUpdate: user);
           Navigator.pushNamed(context, "/home");
         },
@@ -48,6 +49,7 @@ class _MeetingBoardPageState extends State<MeetingBoardPage> {
     }
     return allPartners;
   }
+
   Widget buildListSchedule(var schedule) {
     String date = schedule["date"];
     String time = schedule["time"];
