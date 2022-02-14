@@ -1,16 +1,18 @@
-# reade
+#  <img src="https://cdn.discordapp.com/attachments/901147038908051526/942683908506542120/Logo_READE_final.png" height="65" width="65"> Reade by Amygdala
+App made for Mile Zero Project Ideacode 2022
 
-A new Flutter project.
+## ⭐Team name 
+Amygdala
 
-## Getting Started
+## 👨‍💻Team members
+- Ibrahim Muhammad Yusuf (hipster)
+- Gary Neville (hustler)
+- Sabyna Maharani (hacker)
+- Tiffany Valentine (hacker)
 
-This project is a starting point for a Flutter application.
+## 📃Brief description of Reade
+Reade merupakan artificial intelligence (AI) berbasis aplikasi mobile yang membantu pengguna mendapatkan pengalaman interview secara realtime. Reade hadir untuk menyelesaikan permasalahan yang sering dialami oleh mahasiswa dan fresh graduate dalam menghadapi proses seleksi untuk bekerja ataupun magang, yaitu proses interview. Reade membantu pengguna melatih kemampuan komunikasi, pemecahan masalah, dan diskusi melalui hands-on practice dengan berbagai jenis mock interview yang disesuaikan dengan industri, pekerjaan, dan tingkat pengalaman pengguna.
 
-A few resources to get you started if this is your first Flutter project:
+## 📱 APK
+to be updated
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
