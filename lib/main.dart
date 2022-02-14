@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Face Detector App ',
+        title: 'Reade: Your Future Companion',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

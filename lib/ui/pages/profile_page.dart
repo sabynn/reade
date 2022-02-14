@@ -40,9 +40,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   return ListView(
                     physics: const BouncingScrollPhysics(),
                     children: [
-                      const SizedBox(height: 50),
-                      ProfileWidget(
-                        imagePath: user.profileImage,
+                      const SizedBox(height: 60),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: ProfileWidget(
+                          imagePath: user.profileImage,
+                        ),
                       ),
                       const SizedBox(height: 38),
                       Row(
